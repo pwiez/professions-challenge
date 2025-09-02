@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Conservation {
+enum ConservationState {
     case good
     case regular
     case bad
