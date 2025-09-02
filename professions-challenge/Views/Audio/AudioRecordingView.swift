@@ -27,9 +27,11 @@ struct AudioRecordingView: View {
                     VStack(alignment: .center) {
                         Text("Inicie a gravação")
                             .font(.system(size: 34))
+                            .foregroundStyle(.black)
                         
                         Text("Toque no \"\(Image(systemName: "microphone.fill"))\" para começar.")
                             .font(.system(size: 17))
+                            .foregroundStyle(.black)
                     }
                 }
                 
