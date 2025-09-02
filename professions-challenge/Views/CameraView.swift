@@ -1,5 +1,5 @@
 //
-//  CameraScreen.swift
+//  CameraView.swift
 //  professions-challenge
 //
 //  Created by Pedro Wiezel on 01/09/25.
