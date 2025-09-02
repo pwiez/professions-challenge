@@ -265,10 +265,12 @@
 				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs authorization to use the microphone.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "O app precisa de permissão para utilizar o microfone";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The app needs authorization to add photos to your gallery.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs authorization to access your photo library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Permisão para transcrever áudios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,10 +299,12 @@
 				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs authorization to use the microphone.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "O app precisa de permissão para utilizar o microfone";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The app needs authorization to add photos to your gallery.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs authorization to access your photo library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Permisão para transcrever áudios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
