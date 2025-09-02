@@ -15,16 +15,16 @@ class RecordModel {
     var name: String
     var createdAt: Date
     var artifact: ArtifactModel
-    var photos: [UIImage]
+//    var photos: [UIImage]
     var audios: [AudioModel]
     // var location: 
     
-    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, photos: [UIImage], audios: [AudioModel]) {
+    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel]) {
         self.id = id
         self.name = name
         self.createdAt = createdAt
         self.artifact = artifact
-        self.photos = photos
+//        self.photos = photos
         self.audios = audios
     }
 }
