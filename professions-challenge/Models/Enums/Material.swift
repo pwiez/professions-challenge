@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Material {
+enum Material: Codable {
     case rubber
     case coal
     case ceramic
