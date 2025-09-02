@@ -6,19 +6,19 @@
 //
 
 import MijickCamera
+import PhotosUI
 import SwiftUI
 
 struct CameraModel: MCameraScreen {
-    @Environment(\.dismiss) var dismiss
-    
     @ObservedObject var cameraManager: CameraManager
     let namespace: Namespace.ID
     let closeMCameraAction: () -> ()
-    
     @State var flashOn: Bool = false
     @State var isFrontCamera: Bool = false
-    //TODO: implementar o picker da galeria
-    @State var shouldPresentPickerSheet: Bool = false
+    
+    @State private var shouldPresentPhotosPicker: Bool = false
+    @State private var selectedItems = [PhotosPickerItem]()
+    @State private var selectedImages = [Image]()
     
     init(cameraManager: CameraManager, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
         self.cameraManager = cameraManager
@@ -27,49 +27,67 @@ struct CameraModel: MCameraScreen {
     }
     
     var body: some View {
-            ZStack {
-                createCameraOutputView()
-                    .ignoresSafeArea()
-                
-                VStack (alignment: .center){
-                    HStack {
-                        createFlashButton()
+        ZStack {
+            createCameraOutputView()
+                .ignoresSafeArea()
+            
+            VStack (alignment: .center){
+                HStack {
+                    createFlashButton()
+                        .padding(.bottom, 25)
+                        .padding([.trailing, .leading], 40)
+                    Spacer()
+                    Button {
+                        exit(0)
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .font(.system(size: 36))
+                            .foregroundStyle(.white)
                             .padding(.bottom, 25)
                             .padding([.trailing, .leading], 40)
-                        Spacer()
-                        Button {
-                            exit(0)
-                        } label: {
-                            Image(systemName: "xmark.circle")
-                                .font(.system(size: 36))
-                                .foregroundStyle(.white)
-                                .padding(.bottom, 25)
-                                .padding([.trailing, .leading], 40)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: 60)
+                .padding(.top, 20)
+                .background(Color.black.opacity(0.5))
+                
+                Spacer()
+                
+                HStack {
+                    Button {
+                        shouldPresentPhotosPicker.toggle()
+                    } label: {
+                        Image("GalleryButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48, height: 48)
+                    }
+                    .padding(.top, 15)
+                    .padding([.trailing, .leading], 40)
+                    .photosPicker(isPresented: $shouldPresentPhotosPicker, selection: $selectedItems, matching: .images)
+                    .onChange(of: selectedItems) {
+                        Task {
+                            selectedImages.removeAll()
+                            for item in selectedItems {
+                                if let image = try? await item.loadTransferable(type: Image.self){
+                                    selectedImages.append(image)
+                                }
+                            }
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 60)
-                    .padding(.top, 20)
-                    .background(Color.black.opacity(0.5))
-                    
                     Spacer()
-                    
-                    HStack {
-                        createPhotoLibraryButton()
-                            .padding(.top, 15)
-                            .padding([.trailing, .leading], 40)
-                        Spacer()
-                        createCaptureButton()
-                            .padding([.top, .trailing, .leading], 15)
-                        Spacer()
-                        createSwitchCameraButton()
-                            .padding(.top, 15)
-                            .padding([.trailing, .leading], 40)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 80)
-                    .padding(.bottom, 20)
-                    .background(Color.black.opacity(0.5))
+                    createCaptureButton()
+                        .padding([.top, .trailing, .leading], 15)
+                    Spacer()
+                    createSwitchCameraButton()
+                        .padding(.top, 15)
+                        .padding([.trailing, .leading], 40)
                 }
+                .frame(maxWidth: .infinity, maxHeight: 80)
+                .padding(.bottom, 20)
+                .background(Color.black.opacity(0.5))
             }
+        }
         .onAppear(perform: setDefaultCameraState)
         .preferredColorScheme(.dark)
     }
@@ -127,17 +145,6 @@ private extension CameraModel {
         }
         label: {
             Image("CameraFlipButton")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 48, height: 48)
-        }
-    }
-    func createPhotoLibraryButton() -> some View {
-        Button{
-            shouldPresentPickerSheet.toggle()
-        }
-        label: {
-            Image("GalleryButton")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 48, height: 48)

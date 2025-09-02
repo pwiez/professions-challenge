@@ -21,12 +21,13 @@ struct CapturedScreen: MCapturedMediaScreen {
 }
 
 private extension CapturedScreen {
-    // Se há uma imagem capturada, cria a view pra ela, caso contrário, mostra uma view vazia
+    //essa extensão cria a view da imagem após a captura. Se não existir imagem, uma view vazia será criada.
     func createContentView() -> some View { ZStack {
         if let image = capturedMedia.getImage() { createImageView(image) }
         else { EmptyView() }
     }}
     
+    //chama os métodos definidos na extensão privada abaixo para criar os botões de refazer e salvar.
     func createButtons() -> some View {
         HStack() {
             createRetakeButton()
@@ -38,7 +39,7 @@ private extension CapturedScreen {
 }
 
 private extension CapturedScreen {
-
+    //extensão responsável por criar a view de imagem em si, além dos botões de salvar e refazer.
     func createImageView(_ image: UIImage) -> some View {
         Image(uiImage: image)
             .resizable()
