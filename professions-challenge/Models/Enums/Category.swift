@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category {
+enum Category: Codable {
     case artefact
     case ecofact
     case bioarcheological

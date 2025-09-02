@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Decoration {
+enum Decoration: Codable {
     case smoothed
     case burnished
     case corrugated
