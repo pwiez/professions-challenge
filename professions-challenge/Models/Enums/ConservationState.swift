@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ConservationState {
+enum ConservationState: Codable {
     case good
     case regular
     case bad

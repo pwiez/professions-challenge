@@ -5,7 +5,7 @@
 //  Created by Rafael Venetikides on 01/09/25.
 //
 
-enum ProductionTechnique {
+enum ProductionTechnique: Codable {
     case chipped
     case chopped
     case polished
