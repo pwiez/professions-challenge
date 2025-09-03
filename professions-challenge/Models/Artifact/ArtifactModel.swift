@@ -20,3 +20,9 @@ class ArtifactModel {
         self.artifactDetails = artifactDetails
     }
 }
+
+extension ArtifactModel {
+    static func mock() -> ArtifactModel {
+        return ArtifactModel()
+    }
+}

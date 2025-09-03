@@ -28,3 +28,15 @@ class RecordModel {
         self.audios = audios
     }
 }
+
+extension RecordModel {
+    static func mock() -> RecordModel {
+        return RecordModel(
+            id: UUID(),
+            name: "Ficha 1",
+            createdAt: Date(),
+            artifact: ArtifactModel.mock(),
+            audios: []
+        )
+    }
+}
