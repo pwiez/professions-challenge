@@ -45,18 +45,22 @@ struct RecordCardView: View {
                 VStack{
                     Button{
                         // TODO: Include button action
+                        print("Share pressed")
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundStyle(.blueDark)
                             .font(.system(size: 16, weight: .semibold))
                     }
+                    .buttonStyle(.plain)
+                    
                         Spacer()
                 }
             }
             .frame(height: 62)
             
             Rectangle()
-                .frame(width: .infinity, height: 0.2)
+                .frame(maxWidth: .infinity)
+                .frame(height: 0.2)
                 .foregroundStyle(.clay)
                 .padding(.bottom, 12)
             

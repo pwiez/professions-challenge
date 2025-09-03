@@ -18,7 +18,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, MApplicationDelegate {
 struct professions_challengeApp: App {
     var body: some Scene {
         WindowGroup {
-            CameraView()
+            ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }
