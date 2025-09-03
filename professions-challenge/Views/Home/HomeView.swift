@@ -9,11 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-//    @Query var records: [RecordModel]
-    var records: [RecordModel] = {
-        let records: [RecordModel] = [RecordModel(id: UUID(), name: "Artefato 1", createdAt: Date(), artifact: ArtifactModel(), audios: [])]
-        return records
-    }()
+    @Query var records: [RecordModel]
     
     var body: some View {
         ZStack {

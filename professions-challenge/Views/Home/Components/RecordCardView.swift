@@ -117,6 +117,6 @@ struct RecordCardView: View {
 }
 
 #Preview {
-    RecordCardView(record: RecordModel(id: UUID(), name: "Artefato 1", createdAt: Date(), artifact: ArtifactModel(), audios: []))
+    RecordCardView(record: RecordModel.mock())
         .padding(.horizontal, 12)
 }
