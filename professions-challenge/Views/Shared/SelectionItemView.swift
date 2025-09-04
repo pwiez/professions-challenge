@@ -35,5 +35,5 @@ struct SelectionItemView: View {
 }
 
 #Preview {
-    SelectionItemView(text: "Teste", isSelected: .constant(false))
+    SelectionItemView(text: "Test", isSelected: .constant(false))
 }
