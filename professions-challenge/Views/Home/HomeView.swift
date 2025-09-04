@@ -9,7 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query var records: [RecordModel]
+    
+    @State private var showFilters = false
+    @State private var filters = FilterOptions()
     
     var body: some View {
         ZStack {
@@ -24,7 +28,7 @@ struct HomeView: View {
                     Spacer()
                     
                     Button {
-                        // TODO: Add filter
+                        showFilters.toggle()
                     } label: {
                         Text("\(Image(systemName: "slider.horizontal.3")) Filtros")
                             .foregroundStyle(.light)
@@ -80,6 +84,17 @@ struct HomeView: View {
             }
             .padding(.horizontal, 12)
         }
+        .sheet(isPresented: $showFilters) {
+            FilterSheetView(filters: $filters) {
+                
+            }
+                .presentationDetents([.fraction(0.3)])
+                .presentationDragIndicator(.visible)
+        }
+    }
+    
+    private func applyFilters() {
+        // TODO: Apply homeView filter
     }
 }
 
