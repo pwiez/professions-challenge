@@ -6,13 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */ = {isa = PBXBuildFile; productRef = 3C746CE52E686B1E00AFFB56 /* LocationFormatter */; };
+		3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA30DC02E65DA29002F01C3 /* GoogleMaps */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B137BA912E5F277800DE87BF /* professions-challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "professions-challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B137BA902E5F277800DE87BF /* professions-challenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B137BA932E5F277800DE87BF /* professions-challenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */,
+			);
 			path = "professions-challenge";
 			sourceTree = "<group>";
 		};
@@ -23,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */,
+				3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +85,8 @@
 			);
 			name = "professions-challenge";
 			packageProductDependencies = (
+				3CA30DC02E65DA29002F01C3 /* GoogleMaps */,
+				3C746CE52E686B1E00AFFB56 /* LocationFormatter */,
 			);
 			productName = "professions-challenge";
 			productReference = B137BA912E5F277800DE87BF /* professions-challenge.app */;
@@ -94,6 +116,10 @@
 			);
 			mainGroup = B137BA882E5F277800DE87BF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				3C746CE42E686B1E00AFFB56 /* XCRemoteSwiftPackageReference "LocationFormatter" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B137BA922E5F277800DE87BF /* Products */;
 			projectDirPath = "";
@@ -127,6 +153,8 @@
 /* Begin XCBuildConfiguration section */
 		B137BA9A2E5F277900DE87BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B137BA932E5F277800DE87BF /* professions-challenge */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -191,6 +219,8 @@
 		};
 		B137BA9B2E5F277900DE87BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B137BA932E5F277800DE87BF /* professions-challenge */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -248,14 +278,18 @@
 		};
 		B137BA9D2E5F277900DE87BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B137BA932E5F277800DE87BF /* professions-challenge */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2Q5VC69BFD;
+				DEVELOPMENT_TEAM = QQC64D2K9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -276,14 +310,18 @@
 		};
 		B137BA9E2E5F277900DE87BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = B137BA932E5F277800DE87BF /* professions-challenge */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2Q5VC69BFD;
+				DEVELOPMENT_TEAM = QQC64D2K9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -324,6 +362,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3C746CE42E686B1E00AFFB56 /* XCRemoteSwiftPackageReference "LocationFormatter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/salishseasoftware/LocationFormatter.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+		3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C746CE52E686B1E00AFFB56 /* LocationFormatter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C746CE42E686B1E00AFFB56 /* XCRemoteSwiftPackageReference "LocationFormatter" */;
+			productName = LocationFormatter;
+		};
+		3CA30DC02E65DA29002F01C3 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B137BA892E5F277800DE87BF /* Project object */;
 }

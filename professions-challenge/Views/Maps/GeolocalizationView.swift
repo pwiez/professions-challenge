@@ -8,11 +8,50 @@
 import SwiftUI
 
 struct GeolocalizationView: View {
+    @StateObject private var viewModel = MapsViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack {
+                MapsView(viewModel: viewModel)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            viewModel.updateCurrentLocation()
+                        } label: {
+                            Image(systemName: "location.fill")
+                                .font(.title)
+                        }
+                        .padding()
+                    }
+                }
+                Button {
+                    viewModel.updateUTMCoordinates()
+                } label: {
+                    Rectangle()
+                        //.offset(y: -100)
+                        .frame(width: 100, height: 40)
+                        .overlay(
+                            Text(viewModel.utmString)
+                                .foregroundStyle(.white)
+                                .font(.caption)
+                        )
+                }
+                
+                Image(systemName: "mappin")
+                    .font(.system(size: 48, weight: .bold, design: .default))
+                    .offset(y:-24)
+            }
+            .navigationTitle("Geolocalização")
+            
+           
+        }
     }
 }
 
-#Preview {
-    GeolocalizationView()
-}
+//#Preview {
+//    GeolocalizationView()
+//}

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
+
+struct MapMarkerModel: Identifiable {
+    let id = UUID()
+    let position: CLLocationCoordinate2D
+    let title: String
+    let snippet: String
+}
