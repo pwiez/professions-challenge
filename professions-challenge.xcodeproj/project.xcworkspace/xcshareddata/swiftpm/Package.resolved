@@ -1,0 +1,51 @@
+{
+  "originHash" : "e3e79af01046faade42c9284b8943aa7fefaf7e6da642658ced21e5293e0cc62",
+  "pins" : [
+    {
+      "identity" : "camera",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mijick/Camera.git",
+      "state" : {
+        "revision" : "3cb2b56003910f765d7a5d39d2c2cb49717519cf",
+        "version" : "3.0.2"
+      }
+    },
+    {
+      "identity" : "ios-maps-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-maps-sdk",
+      "state" : {
+        "revision" : "b54007c9d9e5957561d1e1f1d1af4f4bb3ddceae",
+        "version" : "10.2.0"
+      }
+    },
+    {
+      "identity" : "locationformatter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/salishseasoftware/LocationFormatter.git",
+      "state" : {
+        "revision" : "d0a45f9a2471b20e0af4792533d79a469d86fc61",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "timer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mijick/Timer",
+      "state" : {
+        "revision" : "342371c33c3f084d82a4818447ba77d858064c85",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "utmconversion",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wtw-software/UTMConversion",
+      "state" : {
+        "revision" : "53172a2f32b4c403a7ab362e0995fd48e9ef9d2b",
+        "version" : "1.4.0"
+      }
+    }
+  ],
+  "version" : 3
+}

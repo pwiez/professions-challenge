@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */ = {isa = PBXBuildFile; productRef = 3C746CE52E686B1E00AFFB56 /* LocationFormatter */; };
 		3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA30DC02E65DA29002F01C3 /* GoogleMaps */; };
+		DDDD2B252E65DACC00036D7C /* MijickCamera in Frameworks */ = {isa = PBXBuildFile; productRef = DDDD2B242E65DACC00036D7C /* MijickCamera */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			files = (
 				3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */,
 				3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */,
+				DDDD2B252E65DACC00036D7C /* MijickCamera in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				3CA30DC02E65DA29002F01C3 /* GoogleMaps */,
 				3C746CE52E686B1E00AFFB56 /* LocationFormatter */,
+				DDDD2B242E65DACC00036D7C /* MijickCamera */,
 			);
 			productName = "professions-challenge";
 			productReference = B137BA912E5F277800DE87BF /* professions-challenge.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				3C746CE42E686B1E00AFFB56 /* XCRemoteSwiftPackageReference "LocationFormatter" */,
+				DDDD2B232E65DACC00036D7C /* XCRemoteSwiftPackageReference "Camera" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B137BA922E5F277800DE87BF /* Products */;
@@ -289,7 +293,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "O app precisa de permissão para utilizar o microfone";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The app needs authorization to add photos to your gallery.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs authorization to access your photo library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Permisão para transcrever áudios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -300,7 +310,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.venetikides..professions-challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.professionschallange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -321,7 +331,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "O app precisa de permissão para utilizar o microfone";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The app needs authorization to add photos to your gallery.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs authorization to access your photo library.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Permisão para transcrever áudios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,7 +348,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.venetikides..professions-challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.professionschallange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -380,6 +396,14 @@
 				minimumVersion = 10.2.0;
 			};
 		};
+		DDDD2B232E65DACC00036D7C /* XCRemoteSwiftPackageReference "Camera" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mijick/Camera.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -392,6 +416,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMaps;
+		};
+		DDDD2B242E65DACC00036D7C /* MijickCamera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDDD2B232E65DACC00036D7C /* XCRemoteSwiftPackageReference "Camera" */;
+			productName = MijickCamera;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

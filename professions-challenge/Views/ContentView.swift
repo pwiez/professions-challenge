@@ -2,18 +2,16 @@
 //  ContentView.swift
 //  professions-challenge
 //
-//  Created by Rafael Venetikides on 27/08/25.
+//  Created by Pedro Wiezel on 02/09/25.
 //
 
 import SwiftUI
-import CoreLocation
 
 struct ContentView: View {
     var body: some View {
-        GeolocalizationView()
+        HomeView()
     }
 }
-
 
 #Preview {
     ContentView()

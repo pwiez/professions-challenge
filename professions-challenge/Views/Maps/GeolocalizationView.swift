@@ -52,6 +52,6 @@ struct GeolocalizationView: View {
     }
 }
 
-//#Preview {
-//    GeolocalizationView()
-//}
+#Preview {
+    GeolocalizationView()
+}
