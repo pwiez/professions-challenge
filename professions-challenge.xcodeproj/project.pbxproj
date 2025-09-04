@@ -20,17 +20,29 @@
 		3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Extensions/Color.swift,
 				Info.plist,
 			);
 			target = B137BA902E5F277800DE87BF /* professions-challenge */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		DD9C40F82E69D52700D3A8B8 /* Exceptions for "professions-challenge" folder in "Copy Bundle Resources" phase from "professions-challenge" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = B137BA8F2E5F277800DE87BF /* Resources */;
+			membershipExceptions = (
+				Extensions/Color.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B137BA932E5F277800DE87BF /* professions-challenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */,
+				DD9C40F82E69D52700D3A8B8 /* Exceptions for "professions-challenge" folder in "Copy Bundle Resources" phase from "professions-challenge" target */,
 			);
 			path = "professions-challenge";
 			sourceTree = "<group>";
@@ -289,7 +301,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QQC64D2K9P;
+				DEVELOPMENT_TEAM = 7D72492J35;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
@@ -310,7 +322,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.professionschallange;
+				PRODUCT_BUNDLE_IDENTIFIER = asdasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -327,7 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QQC64D2K9P;
+				DEVELOPMENT_TEAM = 7D72492J35;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
@@ -348,7 +360,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.professionschallange;
+				PRODUCT_BUNDLE_IDENTIFIER = asdasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

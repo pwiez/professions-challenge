@@ -13,6 +13,7 @@ struct GeolocalizationView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                
                 MapsView(viewModel: viewModel)
                 
                 VStack {
@@ -22,36 +23,79 @@ struct GeolocalizationView: View {
                         Button {
                             viewModel.updateCurrentLocation()
                         } label: {
-                            Image(systemName: "location.fill")
-                                .font(.title)
+                            Circle()
+                                .fill(Color.clay)
+                                .frame(width: 64, height: 64)
+                                .overlay(
+                                    Image("locationIcon")
+                                        .resizable()
+                                        .frame(width: 32, height: 32)
+                                    
+                                )
+                                .shadow(radius: 4)
                         }
                         .padding()
+                        .padding(.bottom, 32)
+                    }
+                    
+                    ZStack{
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: 120)
+                            .foregroundStyle(.light2)
+                        Button{
+                        } label: {
+                            Text("Salvar")
+                                .font(.system(size: 17))
+                                .foregroundStyle(.light)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(.clay)
+                                }
+                                .padding(16)
+                                .padding(.bottom, 21)
+                        }
                     }
                 }
-                Button {
-                    viewModel.updateUTMCoordinates()
-                } label: {
-                    Rectangle()
-                        //.offset(y: -100)
-                        .frame(width: 100, height: 40)
-                        .overlay(
-                            Text(viewModel.utmString)
-                                .foregroundStyle(.white)
-                                .font(.caption)
-                        )
-                }
                 
-                Image(systemName: "mappin")
-                    .font(.system(size: 48, weight: .bold, design: .default))
-                    .offset(y:-24)
+                VStack{
+                    Button {
+                        viewModel.updateUTMCoordinates()
+                    } label: {
+                        Rectangle()
+                            .frame(width: 225, height: 50)
+                            .cornerRadius(12)
+                            .foregroundStyle(.light2)
+                            .overlay(
+                                HStack{
+                                    Text(viewModel.utmString)
+                                        .foregroundStyle(.blueDark2)
+                                        .font(.system(size: 14, weight: .medium))
+                                        .lineLimit(1)
+                                    Image(systemName: "chevron.down")
+                                        .foregroundStyle(.blueDark2)
+                                        .font(.system(size: 14, weight: .medium))
+                                }
+                            )
+                    }
+                    ZStack{
+                        Image("mappin")
+                            .foregroundStyle(.light)
+                            .frame(width: 32, height: 32)
+                        //.offset(y:-55)
+                            .padding(.top, 24)
+                    }
+                }
+                .offset(y: -55)
             }
-            .navigationTitle("Geolocalização")
-            
-           
+            .ignoresSafeArea(edges: .all)
         }
+        .navigationBarBackButtonHidden(false)
+        .toolbarBackground(.light, for: .navigationBar)
     }
 }
 
-#Preview {
-    GeolocalizationView()
-}
+//#Preview {
+//    GeolocalizationView()
+//}
