@@ -7,10 +7,17 @@
 
 import Foundation
 import CoreLocation
+import SwiftData
 
-struct MapMarkerModel: Identifiable {
-    let id = UUID()
-    let position: CLLocationCoordinate2D
-    let title: String
-    let snippet: String
+@Model
+class MapMarkerModel {
+    var position: CLLocationCoordinate2D
+    var title: String
+    var snippet: String
+    
+    init(position: CLLocationCoordinate2D, title: String, snippet: String) {
+        self.position = position
+        self.title = title
+        self.snippet = snippet
+    }
 }
