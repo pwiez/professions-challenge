@@ -9,10 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        GeolocalizationView()
+        GeolocalizationView(coordinates: "")
     }
-}
-
-#Preview {
-    GeolocalizationView()
 }

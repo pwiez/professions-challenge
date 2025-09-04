@@ -30,6 +30,9 @@ class MapsViewModel: NSObject, ObservableObject, GMSMapViewDelegate {
         self.cameraPositionLongitude = locationManager.longitude
         camera = GMSCameraPosition.camera(withTarget: .init(latitude: self.cameraPositionLatitude, longitude: self.cameraPositionLongitude), zoom:camera.zoom)
     }
+    
+    //TODO: implementar função pra atualizar o mapa de acordo com
+    //as coordenadas fornecidas manualmente pelo usuário
 
     func updateUTMCoordinates() {
         self.cameraPositionLatitude = camera.target.latitude

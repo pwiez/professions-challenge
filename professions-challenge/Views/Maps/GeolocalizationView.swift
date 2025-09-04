@@ -10,6 +10,9 @@ import SwiftUI
 struct GeolocalizationView: View {
     @StateObject private var viewModel = MapsViewModel()
     
+    @State var shouldShowManualLocationSheet: Bool = false
+    @State var coordinates: String
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -59,12 +62,25 @@ struct GeolocalizationView: View {
                     }
                 }
                 
+                .sheet(isPresented: $shouldShowManualLocationSheet) {
+                    ManualCoordinatesInputView(
+                        shouldShowManualLocationSheet: $shouldShowManualLocationSheet,
+                        coordinates: $coordinates
+                    )
+                    .padding(.top, 16)
+                    .presentationDetents([.fraction(0.35)])
+                    .presentationDragIndicator(.visible)
+                    .presentationBackground(.light2)
+                }
+                
+                
                 VStack{
                     Button {
                         viewModel.updateUTMCoordinates()
+                        shouldShowManualLocationSheet = true
                     } label: {
                         Rectangle()
-                            .frame(width: 225, height: 50)
+                            .frame(width: 235, height: 50)
                             .cornerRadius(12)
                             .foregroundStyle(.light2)
                             .overlay(
@@ -83,11 +99,10 @@ struct GeolocalizationView: View {
                         Image("mappin")
                             .foregroundStyle(.light)
                             .frame(width: 32, height: 32)
-                        //.offset(y:-55)
                             .padding(.top, 24)
                     }
                 }
-                .offset(y: -55)
+                .offset(y: -57)
             }
             .ignoresSafeArea(edges: .all)
         }
@@ -96,6 +111,6 @@ struct GeolocalizationView: View {
     }
 }
 
-//#Preview {
-//    GeolocalizationView()
-//}
+#Preview {
+    GeolocalizationView(coordinates: "")
+}
