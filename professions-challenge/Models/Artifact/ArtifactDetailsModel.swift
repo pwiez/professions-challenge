@@ -17,7 +17,14 @@ class ArtifactDetailsModel {
     var depth: Double?
     var weight: Double?
     
-    init(inscriptions: String? = nil, filiation: String? = nil, height: Double? = nil, width: Double? = nil, depth: Double? = nil, weight: Double? = nil) {
+    init(
+        inscriptions: String? = nil,
+        filiation: String? = nil,
+        height: Double? = nil,
+        width: Double? = nil,
+        depth: Double? = nil,
+        weight: Double? = nil
+    ) {
         self.inscriptions = inscriptions
         self.filiation = filiation
         self.height = height

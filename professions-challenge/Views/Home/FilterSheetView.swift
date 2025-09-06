@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Flow
 
 struct FilterSheetView: View {
     @Environment(\.dismiss) private var dismiss
@@ -43,12 +44,12 @@ struct FilterSheetView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        HStack(alignment: .center) {
+                        HFlow(itemSpacing: 16, rowSpacing: 8) {
                             SelectionItemView(text: "Exportados", isSelected: $filters.exported)
                             SelectionItemView(text: "Recentes", isSelected: $filters.recents)
                             SelectionItemView(text: "Com Imagem", isSelected: $filters.withImage)
+                            SelectionItemView(text: "Com Áudio", isSelected: $filters.withAudio)
                         }
-                        SelectionItemView(text: "Com Áudio", isSelected: $filters.withAudio)
                     }
                     .padding(0)
                     

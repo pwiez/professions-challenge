@@ -14,7 +14,11 @@ class ArtifactModel {
     var artifactData: ArtifactDataModel?
     var artifactDetails: ArtifactDetailsModel?
     
-    init(location: LocationInfoModel? = nil, artifactData: ArtifactDataModel? = nil, artifactDetails: ArtifactDetailsModel? = nil) {
+    init(
+        location: LocationInfoModel? = nil,
+        artifactData: ArtifactDataModel? = nil,
+        artifactDetails: ArtifactDetailsModel? = nil
+    ) {
         self.location = location
         self.artifactData = artifactData
         self.artifactDetails = artifactDetails
