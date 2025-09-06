@@ -1,5 +1,5 @@
 {
-  "originHash" : "e3e79af01046faade42c9284b8943aa7fefaf7e6da642658ced21e5293e0cc62",
+  "originHash" : "5de324d5476c07ee07217170b6e485f6a6e6ee11714dc09f1bf5acb957ea542c",
   "pins" : [
     {
       "identity" : "camera",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "d0a45f9a2471b20e0af4792533d79a469d86fc61",
         "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swiftui-flow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tevelee/SwiftUI-Flow.git",
+      "state" : {
+        "revision" : "d227f999b2894ab737ef5786d9b14d02d3e5362e",
+        "version" : "3.1.1"
       }
     },
     {

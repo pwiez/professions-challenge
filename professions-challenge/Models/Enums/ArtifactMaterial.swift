@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Material: Codable {
+enum ArtifactMaterial: Codable, Hashable, SelectableOption {
     case rubber
     case coal
     case ceramic
@@ -27,7 +27,7 @@ enum Material: Codable {
     case flora
     case fauna
     case glass
-    case indefinite
+    case indeterminate
     case other(description: String)
     
     var label: String {
@@ -51,8 +51,14 @@ enum Material: Codable {
         case .flora: return "Flora"
         case .fauna: return "Fauna"
         case .glass: return "Vidro"
-        case .indefinite: return "Indefinido"
+        case .indeterminate: return "Indeterminado"
         case .other(let description): return description
         }
+    }
+}
+
+extension ArtifactMaterial {
+    static var selectableOptions: [ArtifactMaterial] {
+        [.rubber, .coal, .ceramic, .faience, .porcelain, .leather, .fossil, .lithic, .wood, .malacological, .metal, .bone, .paper, .sediment, .plastic, .textile, .flora, .fauna, .glass, .indeterminate]
     }
 }

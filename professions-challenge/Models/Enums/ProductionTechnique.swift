@@ -5,7 +5,7 @@
 //  Created by Rafael Venetikides on 01/09/25.
 //
 
-enum ProductionTechnique: Codable {
+enum ProductionTechnique: Codable, Hashable, SelectableOption {
     case chipped
     case chopped
     case polished
@@ -40,5 +40,11 @@ enum ProductionTechnique: Codable {
         case .indefinite: return "Indeterminado"
         case .other(let description): return description
         }
+    }
+}
+
+extension ProductionTechnique {
+    static var selectableOptions: [ProductionTechnique] {
+        [.chipped, .chopped, .polished, .modeled, .punctured, .rolled, .turned, .molded, .taxidermied, .woven, .blown, .cast, .forged, .indefinite]
     }
 }

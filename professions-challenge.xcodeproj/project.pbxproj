@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */ = {isa = PBXBuildFile; productRef = 3C746CE52E686B1E00AFFB56 /* LocationFormatter */; };
 		3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA30DC02E65DA29002F01C3 /* GoogleMaps */; };
+		B1C02F202E6A261D00B5AEC8 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = B1C02F1F2E6A261D00B5AEC8 /* Flow */; };
 		DDDD2B252E65DACC00036D7C /* MijickCamera in Frameworks */ = {isa = PBXBuildFile; productRef = DDDD2B242E65DACC00036D7C /* MijickCamera */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C02F202E6A261D00B5AEC8 /* Flow in Frameworks */,
 				3C746CE62E686B1E00AFFB56 /* LocationFormatter in Frameworks */,
 				3CA30DC12E65DA29002F01C3 /* GoogleMaps in Frameworks */,
 				DDDD2B252E65DACC00036D7C /* MijickCamera in Frameworks */,
@@ -102,6 +104,7 @@
 				3CA30DC02E65DA29002F01C3 /* GoogleMaps */,
 				3C746CE52E686B1E00AFFB56 /* LocationFormatter */,
 				DDDD2B242E65DACC00036D7C /* MijickCamera */,
+				B1C02F1F2E6A261D00B5AEC8 /* Flow */,
 			);
 			productName = "professions-challenge";
 			productReference = B137BA912E5F277800DE87BF /* professions-challenge.app */;
@@ -135,6 +138,7 @@
 				3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				3C746CE42E686B1E00AFFB56 /* XCRemoteSwiftPackageReference "LocationFormatter" */,
 				DDDD2B232E65DACC00036D7C /* XCRemoteSwiftPackageReference "Camera" */,
+				B1C02F1E2E6A261D00B5AEC8 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B137BA922E5F277800DE87BF /* Products */;
@@ -301,7 +305,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D72492J35;
+				DEVELOPMENT_TEAM = QQC64D2K9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
@@ -339,7 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D72492J35;
+				DEVELOPMENT_TEAM = QQC64D2K9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
@@ -408,6 +412,14 @@
 				minimumVersion = 10.2.0;
 			};
 		};
+		B1C02F1E2E6A261D00B5AEC8 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		DDDD2B232E65DACC00036D7C /* XCRemoteSwiftPackageReference "Camera" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Mijick/Camera.git";
@@ -428,6 +440,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3CA30DBF2E65DA29002F01C3 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMaps;
+		};
+		B1C02F1F2E6A261D00B5AEC8 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1C02F1E2E6A261D00B5AEC8 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
 		};
 		DDDD2B242E65DACC00036D7C /* MijickCamera */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Decoration: Codable {
+enum Decoration: Codable, Hashable, SelectableOption {
     case smoothed
     case burnished
     case corrugated
@@ -44,5 +44,11 @@ enum Decoration: Codable {
         case .dontApply: return "Não se aplica"
         case .other(let description): return description
         }
+    }
+}
+
+extension Decoration {
+    static var selectableOptions: [Decoration] {
+        [.smoothed, .burnished, .corrugated, .brushed, .ungulate, .incision, .impression, .plastic, .painted, .punction, .applique, .englobe, .stencil, .carving, .dontApply]
     }
 }
