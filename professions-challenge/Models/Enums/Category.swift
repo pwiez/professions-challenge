@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: Codable {
+enum Category: Codable, Hashable, SelectableOption {
     case artefact
     case ecofact
     case bioarcheological
@@ -28,5 +28,11 @@ enum Category: Codable {
         case .zooarchaeological: return "Zooarqueológico"
         case .other(let description): return description
         }
+    }
+}
+
+extension Category {
+    static var selectableOptions: [Category] {
+        [.artefact, .ecofact, .bioarcheological, .structure, .sediment, .archaeobotanical, .zooarchaeological]
     }
 }

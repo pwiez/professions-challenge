@@ -15,7 +15,12 @@ class LocationInfoModel {
     var adress: String?
     var institution: String?
     
-    init(site: String? = nil, processNumber: Int? = nil, adress: String? = nil, institution: String? = nil) {
+    init(
+        site: String? = nil,
+        processNumber: Int? = nil,
+        adress: String? = nil,
+        institution: String? = nil
+    ) {
         self.site = site
         self.processNumber = processNumber
         self.adress = adress
