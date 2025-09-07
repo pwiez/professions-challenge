@@ -16,6 +16,7 @@ class AudioRecorder: ObservableObject {
     @Published var isRecording = false
     @Published var recordings: [AudioRecording] = []
     @Published var currentPower: Float = 0.0
+    @Published var recordingTime: TimeInterval = 0.0
     
     private var timer: Timer?
     
@@ -51,16 +52,26 @@ class AudioRecorder: ObservableObject {
             audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.record()
-            isRecording = true
-            print("Recording in: \(audioURL)")
             
-            timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-                self?.audioRecorder?.updateMeters()
-                let power = self?.audioRecorder?.averagePower(forChannel: 0) ?? -160
-                DispatchQueue.main.async {
-                    self?.currentPower = power
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.isRecording = true
                 }
             }
+            print("Recording in: \(audioURL)")
+            
+            recordingTime = 0
+            timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: { [weak self] _ in
+                guard let self = self else { return }
+                
+                self.audioRecorder?.updateMeters()
+                let power = self.audioRecorder?.averagePower(forChannel: 0) ?? -160
+                
+                DispatchQueue.main.async {
+                    self.currentPower = power
+                    self.recordingTime += 0.03
+                }
+            })
         } catch {
             print("Error starting recording: \(error)")
         }
@@ -68,9 +79,14 @@ class AudioRecorder: ObservableObject {
     
     func stopRecording() {
         audioRecorder?.stop()
-        isRecording = false
+        DispatchQueue.main.async {
+            withAnimation {
+                self.isRecording = false
+            }
+        }
         timer?.invalidate()
         timer = nil
+        recordingTime = 0
         fetchRecordings()
     }
     

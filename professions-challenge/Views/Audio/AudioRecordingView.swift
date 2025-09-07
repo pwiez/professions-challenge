@@ -9,17 +9,24 @@ import SwiftUI
 
 struct AudioRecordingView: View {
     @StateObject private var recorder = AudioRecorder()
+    @StateObject private var transcriber = AudioTranscriber()
+    
+    @State private var navigateToPreview = false
+    @State private var recordedAudioURL: URL? = nil
+    @State private var audioTranscription: String = ""
     
     var body: some View {
         ZStack {
             Color.light.ignoresSafeArea()
             
-            VStack(spacing: 20) {
-                
-                NavigationLink("Hear recordings") {
-                    AudioListView()
+            NavigationLink("", isActive: $navigateToPreview) {
+                if let url = recordedAudioURL {
+                    AudioPreviewView(audioURL: url, initialTranscription: transcriber.transcription)
                 }
-                .padding(.top, 40)
+            }
+            .hidden()
+            
+            VStack(spacing: 20) {
                 
                 Spacer()
                 
@@ -37,36 +44,67 @@ struct AudioRecordingView: View {
                 
                 Spacer()
                 
-                ZStack(alignment: .top) {
-                    
-                    Color.light2
-                        .frame(width: 999, height: 200)
-                        .ignoresSafeArea(edges: [.leading, .trailing, .bottom])
-                    
-                    
-                    
-                    VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 24) {
+                    if recorder.isRecording {
+                        Text(formatTime(recorder.recordingTime))
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(.blueDark2)
+                            .transition(.opacity.combined(with: .scale))
+                        
+                        
                         VolumeVisualizerView(power: recorder.currentPower)
                             .frame(height: 60)
-                            .padding(.bottom, 8)
-                            .padding(.top, 12)
-                        
-                        Button {
-                            recorder.isRecording ? recorder.stopRecording() : recorder.startRecording()
-                        } label: {
-                            Text(recorder.isRecording ? Image(systemName: "square.fill") : Image(systemName: "microphone.fill"))
-                                .font(.system(size: 22))
-                                .padding()
-                                .background(.clay)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-                        .padding(.top, 12)
+                            .padding(.vertical, 24)
+                    }
+                    
+                    Button {
+                        recorder.isRecording ? recorder.stopRecording() : recorder.startRecording()
+                    } label: {
+                        Text(recorder.isRecording ? Image(systemName: "square.fill") : Image(systemName: "microphone.fill"))
+                            .font(.system(size: 17))
+                            .padding(20)
+                            .foregroundColor(.white)
+                            .background {
+                                Circle()
+                                    .fill(.clay)
+                            }
                     }
                 }
+                .animation(.easeInOut(duration: 0.1), value: recorder.isRecording)
+                .padding(.top, 20)
+                .padding(.bottom, 32)
+                .frame(maxWidth: .infinity)
+                .background{
+                    Color.light2
+                }
+                
             }
         }
         .ignoresSafeArea(edges: .bottom)
+        .onChange(of: recorder.isRecording) { isRecording in
+            if !isRecording {
+                if let lastRecording = recorder.recordings.last {
+                    recordedAudioURL = lastRecording.fileURL
+                    audioTranscription = ""
+                    transcriber.transcribeAudio(url: lastRecording.fileURL)
+                }
+            }
+        }
+        .onChange(of: transcriber.transcription) { oldValue, newValue in
+            if !newValue.isEmpty {
+                audioTranscription = newValue
+                navigateToPreview = true
+            }
+        }
+    }
+    
+    func formatTime(_ time: TimeInterval) -> String {
+        let totalMilliseconds = Int((time * 100).rounded())
+        let minutes = totalMilliseconds / 6000
+        let seconds = (totalMilliseconds % 6000) / 100
+        let hundredths = totalMilliseconds % 100
+        
+        return String(format: "%02d:%02d.%02d", minutes, seconds, hundredths)
     }
 }
 
