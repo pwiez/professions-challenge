@@ -16,81 +16,84 @@ struct HomeView: View {
     @State private var filters = FilterOptions()
     
     var body: some View {
-        ZStack {
-            Color.light.ignoresSafeArea()
-            
-            VStack(spacing: 22) {
-                HStack{
-                    Text("Nome do App")
-                        .foregroundStyle(.blueDark)
-                        .font(.system(size: 22, weight: .bold))
+        NavigationStack{
+            ZStack {
+                Color.light.ignoresSafeArea()
+                
+                VStack(spacing: 22) {
+                    HStack{
+                        Text("Nome do App")
+                            .foregroundStyle(.blueDark)
+                            .font(.system(size: 22, weight: .bold))
+                        
+                        Spacer()
+                        
+                        Button {
+                            showFilters.toggle()
+                        } label: {
+                            Text("\(Image(systemName: "slider.horizontal.3")) Filtros")
+                                .foregroundStyle(.light)
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 8)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.clay)
+                                }
+                        }
+                    }
                     
+                    if records.isEmpty {
+                        Spacer()
+                        
+                        VStack(spacing: 6){
+                            Text("Nenhuma ficha adicionada ainda.")
+                                .multilineTextAlignment(.center)
+                                .font(.system(size: 28, weight: .bold))
+                                .foregroundStyle(.blueDark)
+                            
+                            Text("Toque em \"Cadastrar ficha\" para começar")
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.blueDark)
+                                .frame(width: 243)
+                        }
+                        
+                    } else {
+                        ScrollView {
+                            VStack {
+                                ForEach(records){ record in
+                                    RecordCardView(record: record)
+                                }
+                            }
+                        }
+                        
+                    }
                     Spacer()
                     
-                    Button {
-                        showFilters.toggle()
+                    NavigationLink {
+                        TitleRegistrationView()
                     } label: {
-                        Text("\(Image(systemName: "slider.horizontal.3")) Filtros")
+                        Text("Cadastrar ficha")
+                            .font(.system(size: 17))
                             .foregroundStyle(.light)
-                            .padding(.vertical, 6)
-                            .padding(.horizontal, 8)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
                             .background{
-                                RoundedRectangle(cornerRadius: 10)
+                                RoundedRectangle(cornerRadius: 12)
                                     .fill(.clay)
                             }
                     }
                 }
-                
-                if records.isEmpty {
-                    Spacer()
-                    
-                    VStack(spacing: 6){
-                        Text("Nenhuma ficha adicionada ainda.")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundStyle(.blueDark)
-                        
-                        Text("Toque em \"Cadastrar ficha\" para começar")
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(.blueDark)
-                            .frame(width: 243)
-                    }
-                    
-                } else {
-                    ScrollView {
-                        VStack {
-                            ForEach(records){ record in
-                                RecordCardView(record: record)
-                            }
-                        }
-                    }
+                .padding(.horizontal, 12)
+            }
+            .sheet(isPresented: $showFilters) {
+                FilterSheetView(filters: $filters) {
                     
                 }
-                Spacer()
-                
-                Button{
-                    
-                } label: {
-                    Text("Cadastrar ficha")
-                        .font(.system(size: 17))
-                        .foregroundStyle(.light)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background{
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(.clay)
-                        }
-                }
-            }
-            .padding(.horizontal, 12)
-        }
-        .sheet(isPresented: $showFilters) {
-            FilterSheetView(filters: $filters) {
-                
-            }
                 .presentationDetents([.fraction(0.3)])
                 .presentationDragIndicator(.visible)
+            }
         }
+        .tint(.clay)
     }
     
     private func applyFilters() {

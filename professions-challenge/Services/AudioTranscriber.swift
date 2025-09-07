@@ -32,11 +32,11 @@ class AudioTranscriber: ObservableObject {
             recognizer.recognitionTask(with: self!.request!) { result, error in
                 DispatchQueue.main.async {
                     if let result = result {
-                        self?.transcription = result.bestTranscription.formattedString
-                        print("Transcription: \(result.bestTranscription.formattedString)")
+                        if result.isFinal {
+                            self?.transcription = result.bestTranscription.formattedString
+                        }
                     } else if let error = error {
-                        print("Transcription error: \(error.localizedDescription)")
-                        self?.transcription = "Error: \(error.localizedDescription)"
+                        self?.transcription = ""
                     }
                 }
             }
