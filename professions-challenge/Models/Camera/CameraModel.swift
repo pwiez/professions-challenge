@@ -38,7 +38,7 @@ struct CameraModel: MCameraScreen {
                         .padding([.trailing, .leading], 40)
                     Spacer()
                     Button {
-                        exit(0)
+                        closeMCameraAction()
                     } label: {
                         Image(systemName: "xmark.circle")
                             .font(.system(size: 36))

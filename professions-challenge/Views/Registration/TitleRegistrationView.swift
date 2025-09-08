@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TitleRegistrationView: View {
     @State private var nomeFicha: String = ""
+    @State private var continueToRegister: Bool = false
     
     var body: some View {
         ZStack {
@@ -43,9 +44,9 @@ struct TitleRegistrationView: View {
                     .shadow(color: Color.black.opacity(0.12), radius: 4, x: -1, y: 3)
                 }
                 
-                Button(action: {
-                    print("Botão 'Próximo' tocado. Título digitado: \(nomeFicha)")
-                }) {
+                Button {
+                    continueToRegister = true
+                } label: {
                     Text("Próximo")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -58,13 +59,18 @@ struct TitleRegistrationView: View {
             }
             .padding()
         }
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(isPresented: $continueToRegister, content: {
+            RegisterView()
+                .transition(.slide)
+        })
+        .transaction { transaction in
+//            transaction.disablesAnimations = true
+        }
     }
 }
 
-    #Preview {
-        NavigationView {
-            TitleRegistrationView()
-        }
+#Preview {
+    NavigationView {
+        TitleRegistrationView()
     }
+}

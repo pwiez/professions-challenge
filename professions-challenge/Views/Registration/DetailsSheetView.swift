@@ -135,3 +135,7 @@ struct DetailsSheetView: View {
         }
     }
 }
+
+#Preview {
+    DetailsSheetView()
+}

@@ -14,13 +14,21 @@ struct CapturedImage: Identifiable {
 }
 
 struct CameraView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var imagemCapturada: CapturedImage?
     @State private var showDetails = false
     
     var body: some View {
         NavigationStack {
             MCamera()
-                .setCameraScreen(CameraModel.init)
+                .setCameraScreen { cameraManager, namespace, closeAction in
+                                    CameraModel(
+                                        cameraManager: cameraManager,
+                                        namespace: namespace,
+                                        closeMCameraAction: {dismiss()}
+                                    )
+                                }
                 .onImageCaptured { image, controller in
                     self.imagemCapturada = CapturedImage(image: image)
                     self.showDetails = true
@@ -29,9 +37,6 @@ struct CameraView: View {
                 .setCapturedMediaScreen(CapturedScreen.init)
                 .startSession()
         }
+        .navigationBarBackButtonHidden()
     }
-}
-
-#Preview  {
-    CameraView()
 }
