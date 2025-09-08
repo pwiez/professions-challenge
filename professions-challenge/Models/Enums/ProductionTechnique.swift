@@ -20,7 +20,7 @@ enum ProductionTechnique: Codable, Hashable, SelectableOption {
     case cast
     case forged
     case indefinite
-    case other(description: String)
+    case other(text: String)
     
     var label: String {
         switch self {
@@ -38,7 +38,7 @@ enum ProductionTechnique: Codable, Hashable, SelectableOption {
         case .cast: return "Fundido"
         case .forged: return "Forjado"
         case .indefinite: return "Indeterminado"
-        case .other(let description): return description
+        case .other(let text): return text
         }
     }
 }
