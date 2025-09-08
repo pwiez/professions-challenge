@@ -13,6 +13,8 @@ struct AudioPreviewView: View {
     let audioURL: URL
     let initialTranscription: String
     
+    var recordDraft: RecordDraft
+    
     @State private var transcription: String = ""
     
     var body: some View {
@@ -50,7 +52,8 @@ struct AudioPreviewView: View {
             Spacer()
             
             Button {
-                // TODO: setup navigation when the view is implemented
+                salvarAudio()
+                dismiss()
             } label: {
                 Text("Salvar")
                     .font(.system(size: 17))
@@ -71,4 +74,21 @@ struct AudioPreviewView: View {
         .padding(.horizontal, 12)
         .background(Color.light.ignoresSafeArea())
     }
+    
+    private func salvarAudio() {
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yy"
+            let dateString = formatter.string(from: date)
+
+            let count = recordDraft.audios.filter {
+                $0.name.hasPrefix(dateString)
+            }.count + 1
+            
+            let name = "\(dateString) - \(count)"
+            let recording = AudioRecording(fileURL: audioURL)
+            let newAudio = AudioModel(name: name, audioDescription: transcription, audioRecording: recording)
+            
+            recordDraft.audios.append(newAudio)
+        }
 }

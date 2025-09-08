@@ -15,13 +15,15 @@ struct AudioRecordingView: View {
     @State private var recordedAudioURL: URL? = nil
     @State private var audioTranscription: String = ""
     
+    @ObservedObject var recordDraft: RecordDraft
+    
     var body: some View {
         ZStack {
             Color.light.ignoresSafeArea()
             
             NavigationLink("", isActive: $navigateToPreview) {
                 if let url = recordedAudioURL {
-                    AudioPreviewView(audioURL: url, initialTranscription: transcriber.transcription)
+                    AudioPreviewView(audioURL: url, initialTranscription: transcriber.transcription, recordDraft: recordDraft)
                 }
             }
             .hidden()
@@ -109,5 +111,5 @@ struct AudioRecordingView: View {
 }
 
 #Preview {
-    AudioRecordingView()
+    AudioRecordingView(recordDraft: RecordDraft())
 }
