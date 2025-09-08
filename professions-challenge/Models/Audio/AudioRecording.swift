@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
+@Model
 class AudioRecording: Identifiable {
-    let id = UUID()
-    let fileURL: URL
+    var id = UUID()
+    var fileURL: URL
     var fileName: String {
         fileURL.lastPathComponent
     }

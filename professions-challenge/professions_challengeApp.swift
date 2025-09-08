@@ -27,6 +27,9 @@ struct professions_challengeApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.light)
+                // SwiftData container for data persistence
+                .modelContainer(for: [ArtifactModel.self, ArtifactDataModel.self, ArtifactDetailsModel.self, LocationInfoModel.self])
+                // Missing model for photo, audio, geolocalization (I guess)
         }
     }
 }

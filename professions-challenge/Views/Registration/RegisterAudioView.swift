@@ -33,7 +33,8 @@ struct RegisterAudioView: View {
             VStack {
                 Spacer()
                 
-                Button{
+                NavigationLink {
+                    AudioRecordingView()
                 } label: {
                     Text("\(Image(systemName: "microphone.fill")) Adicionar Áudio")
                         .font(.system(size: 17))

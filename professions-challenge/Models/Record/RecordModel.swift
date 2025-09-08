@@ -15,7 +15,7 @@ class RecordModel {
     var name: String
     var createdAt: Date
     var artifact: ArtifactModel
-//    var photos: [UIImage]
+    // var photos: [UIImage]
     var audios: [AudioModel]
     // var location: 
     
