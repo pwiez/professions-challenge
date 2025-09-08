@@ -4,6 +4,8 @@ struct TitleRegistrationView: View {
     @State private var nomeFicha: String = ""
     @State private var continueToRegister: Bool = false
     
+    var onSave : (RecordModel) -> ()
+    
     var body: some View {
         ZStack {
             Color("Light")
@@ -60,7 +62,7 @@ struct TitleRegistrationView: View {
             .padding()
         }
         .fullScreenCover(isPresented: $continueToRegister, content: {
-            RegisterView()
+            RegisterView(onSave: onSave)
                 .transition(.slide)
         })
         .transaction { transaction in
@@ -71,6 +73,6 @@ struct TitleRegistrationView: View {
 
 #Preview {
     NavigationView {
-        TitleRegistrationView()
+        TitleRegistrationView(onSave: {_ in })
     }
 }

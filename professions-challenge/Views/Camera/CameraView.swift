@@ -8,16 +8,10 @@
 import SwiftUI
 import MijickCamera
 
-struct CapturedImage: Identifiable {
-    let id = UUID()
-    let image: UIImage
-}
-
 struct CameraView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @State private var imagemCapturada: CapturedImage?
-    @State private var showDetails = false
+    @State private var imagemCapturada: CapturedImageModel?
     
     var body: some View {
         NavigationStack {
@@ -30,8 +24,7 @@ struct CameraView: View {
                                     )
                                 }
                 .onImageCaptured { image, controller in
-                    self.imagemCapturada = CapturedImage(image: image)
-                    self.showDetails = true
+                    self.imagemCapturada = CapturedImageModel(uiImage: image)
                 }
                 .lockCameraInPortraitOrientation(AppDelegate.self)
                 .setCapturedMediaScreen(CapturedScreen.init)

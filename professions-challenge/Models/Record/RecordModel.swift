@@ -15,17 +15,18 @@ class RecordModel {
     var name: String
     var createdAt: Date
     var artifact: ArtifactModel
-    // var photos: [UIImage]
+    var photos: [CapturedImageModel]
     var audios: [AudioModel]
     // var location: 
     
-    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel]) {
+    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel], photos: [CapturedImageModel]) {
         self.id = id
         self.name = name
         self.createdAt = createdAt
         self.artifact = artifact
 //        self.photos = photos
         self.audios = audios
+        self.photos = photos
     }
 }
 
@@ -36,7 +37,8 @@ extension RecordModel {
             name: "Ficha 1",
             createdAt: Date(),
             artifact: ArtifactModel.mock(),
-            audios: []
+            audios: [],
+            photos: []
         )
     }
 }

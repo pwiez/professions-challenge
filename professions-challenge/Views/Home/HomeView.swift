@@ -70,7 +70,11 @@ struct HomeView: View {
                     Spacer()
                     
                     NavigationLink {
-                        TitleRegistrationView()
+                        TitleRegistrationView() {
+                            newRecord in
+                            
+                            modelContext.insert(newRecord)
+                        }
                     } label: {
                         Text("Cadastrar ficha")
                             .font(.system(size: 17))

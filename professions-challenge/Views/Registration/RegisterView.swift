@@ -38,6 +38,8 @@ enum RegisterSection: SelectableOption, CaseIterable {
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedSection: RegisterSection? = nil
+    
+    var onSave : (RecordModel) -> ()
 
     var body: some View {
         NavigationStack {
@@ -74,6 +76,7 @@ struct RegisterView: View {
                 }
                 
                 Button{
+                    onSave(RecordModel.mock())
                 } label: {
                     Text("Finalizar ficha")
                         .font(.system(size: 17))
