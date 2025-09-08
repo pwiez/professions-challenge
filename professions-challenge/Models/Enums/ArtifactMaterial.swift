@@ -28,7 +28,7 @@ enum ArtifactMaterial: Codable, Hashable, SelectableOption {
     case fauna
     case glass
     case indeterminate
-    case other(description: String)
+    case other(text: String)
     
     var label: String {
         switch self {
@@ -52,7 +52,7 @@ enum ArtifactMaterial: Codable, Hashable, SelectableOption {
         case .fauna: return "Fauna"
         case .glass: return "Vidro"
         case .indeterminate: return "Indeterminado"
-        case .other(let description): return description
+        case .other(let text): return text
         }
     }
 }
