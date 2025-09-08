@@ -4,7 +4,6 @@ struct TitleRegistrationView: View {
     @Binding var isPresenting: Bool
     @State private var nomeFicha: String = ""
     @State private var continueToRegister: Bool = false
-    
     @StateObject private var recordDraft = RecordDraft()
     
     var body: some View {
