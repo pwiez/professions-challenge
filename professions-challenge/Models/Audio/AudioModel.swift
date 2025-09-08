@@ -9,15 +9,14 @@ import Foundation
 import SwiftData
 
 @Model
-class AudioModel {
+class AudioModel: Identifiable {
+    var id = UUID()
     var name: String
-    var duration: Double
     var audioDescription: String?
     var audioRecording: AudioRecording?
     
-    init(name: String, duration: Double, audioData: Data, audioDescription: String? = nil, audioRecording: AudioRecording? = nil) {
+    init(name: String, audioDescription: String? = nil, audioRecording: AudioRecording? = nil) {
         self.name = name
-        self.duration = duration
         self.audioDescription = audioDescription
         self.audioRecording = audioRecording
     }
