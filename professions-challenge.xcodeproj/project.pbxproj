@@ -22,7 +22,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Secrets.xcconfig,
 			);
 			target = B137BA902E5F277800DE87BF /* professions-challenge */;
 		};
@@ -107,7 +106,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					B137BA902E5F277800DE87BF = {
 						CreatedOnToolsVersion = 16.3;
@@ -294,7 +293,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QQC64D2K9P;
+				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
@@ -332,7 +331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QQC64D2K9P;
+				DEVELOPMENT_TEAM = 2Q5VC69BFD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";

@@ -26,10 +26,10 @@ enum RegisterSection: SelectableOption, CaseIterable {
     
     var view: some View {
         switch self {
-        case .location: return AnyView(Rectangle().foregroundStyle(.red)) // Placeholder
-        case .general: return AnyView(Rectangle().foregroundStyle(.red)) // Placeholder
-        case .audio: return AnyView(RegisterAudioView()) // Placeholder
-        case .photos: return AnyView(RegisterPhotoView()) // Placeholder
+        case .location: return AnyView(RegisterLocationView())
+        case .general: return AnyView(RegisterGeneralView()) // Placeholder
+        case .audio: return AnyView(RegisterAudioView())
+        case .photos: return AnyView(RegisterPhotoView())
         case .geolocation: return AnyView(RegisterGeolocationView())
         }
     }
@@ -59,8 +59,16 @@ struct RegisterView: View {
                 .scrollIndicators(.never)
                 
                 if let section = selectedSection {
-                    section.view
-                        .padding(12)
+                    if section == .general {
+                        ScrollView(.vertical) {
+                            section.view
+                                .padding(12)
+                        }
+                        .scrollIndicators(.never)
+                    } else {
+                        section.view
+                            .padding(12)
+                    }
                 } else {
                     Spacer()
                 }
