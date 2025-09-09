@@ -9,6 +9,8 @@ import SwiftUI
 import Flow
 
 struct DetailsSheetView: View {
+    @ObservedObject var recordDraft: RecordDraft
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var selectedCategories: Set<Category> = []
@@ -114,8 +116,22 @@ struct DetailsSheetView: View {
                         
                         
                         Button {
-                            // TODO: Save selected data
-                            dismiss()
+                            if recordDraft.artifactData == nil {
+                                    recordDraft.artifactData = ArtifactDataModel()
+                                }
+                                
+                                recordDraft.artifactData?.category = selectedCategories.first ?? (
+                                    otherCategotyText.isEmpty ? nil : Category.other(text: otherCategotyText)
+                                )
+
+                                recordDraft.artifactData?.materials = buildArray(from: selectedMaterials, other: otherMaterialText)
+                                recordDraft.artifactData?.productionTechniques = buildArray(from: selectedTechniques, other: otherTechniqueText)
+                                recordDraft.artifactData?.decorations = buildArray(from: selectedDecorations, other: otherDecorationText)
+
+                                recordDraft.artifactData?.conservationState = selectedConservationState
+                                recordDraft.artifactData?.conservationDescription = conservationDescription
+                                
+                                dismiss()
                         } label: {
                             Text("Salvar")
                                 .font(.system(size: 17))
@@ -133,9 +149,58 @@ struct DetailsSheetView: View {
             .padding(.top, 20)
             .padding(.horizontal, 12)
         }
+        .onAppear {
+            let data = recordDraft.artifactData
+
+            if let category = data?.category {
+                switch category {
+                case .other(let text):
+                    otherCategotyText = text
+                default:
+                    selectedCategories = [category]
+                }
+            }
+
+            selectedMaterials = Set(data?.materials?.filter { !$0.isOther } ?? [])
+            otherMaterialText = data?.materials?.compactMap { $0.otherText }.first ?? ""
+
+            selectedTechniques = Set(data?.productionTechniques?.filter { !$0.isOther } ?? [])
+            otherTechniqueText = data?.productionTechniques?.compactMap { $0.otherText }.first ?? ""
+
+            selectedDecorations = Set(data?.decorations?.filter { !$0.isOther } ?? [])
+            otherDecorationText = data?.decorations?.compactMap { $0.otherText }.first ?? ""
+
+            selectedConservationState = data?.conservationState
+            conservationDescription = data?.conservationDescription ?? ""
+        }
+    }
+    
+    func buildArray<T: Hashable>(from selected: Set<T>, other: String) -> [T]? {
+        var result = Array(selected)
+        if !other.trimmingCharacters(in: .whitespaces).isEmpty {
+            if let otherCase = getOtherCase(T.self, text: other) {
+                result.append(otherCase)
+            }
+        }
+        return result.isEmpty ? nil : result
+    }
+    
+    func getOtherCase<T>(_ type: T.Type, text: String) -> T? {
+        switch type {
+        case is Category.Type:
+            return Category.other(text: text) as? T
+        case is ArtifactMaterial.Type:
+            return ArtifactMaterial.other(text: text) as? T
+        case is ProductionTechnique.Type:
+            return ProductionTechnique.other(text: text) as? T
+        case is Decoration.Type:
+            return Decoration.other(text: text) as? T
+        default:
+            return nil
+        }
     }
 }
 
 #Preview {
-    DetailsSheetView()
+    DetailsSheetView(recordDraft: RecordDraft())
 }

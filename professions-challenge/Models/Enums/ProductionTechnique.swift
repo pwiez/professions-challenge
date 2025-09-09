@@ -48,3 +48,17 @@ extension ProductionTechnique {
         [.chipped, .chopped, .polished, .modeled, .punctured, .rolled, .turned, .molded, .taxidermied, .woven, .blown, .cast, .forged, .indefinite]
     }
 }
+
+extension ProductionTechnique {
+    var isOther: Bool {
+        if case .other = self { return true }
+        return false
+    }
+
+    var otherText: String? {
+        if case let .other(text) = self {
+            return text
+        }
+        return nil
+    }
+}

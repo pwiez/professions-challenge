@@ -26,8 +26,8 @@ enum RegisterSection: SelectableOption, CaseIterable {
     
     func view(recordDraft: RecordDraft) -> some View {
             switch self {
-            case .location: return AnyView(RegisterLocationView())
-            case .general: return AnyView(RegisterGeneralView())
+            case .location: return AnyView(RegisterLocationView(recordDraft: recordDraft))
+            case .general: return AnyView(RegisterGeneralView(recordDraft: recordDraft))
             case .audio: return AnyView(RegisterAudioView(recordDraft: recordDraft))
             case .photos: return AnyView(RegisterPhotoView())
             case .geolocation: return AnyView(RegisterGeolocationView())
