@@ -11,7 +11,6 @@ struct ContentView: View {
     var body: some View {
         HomeView()
             .preferredColorScheme(.light)
-//        CameraView(recordDraft: recordDraft)
     }
 }
 
