@@ -14,3 +14,4 @@ struct ContentView: View {
 //        CameraView(recordDraft: recordDraft)
     }
 }
+
