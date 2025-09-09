@@ -12,9 +12,8 @@ struct RegisterGeneralView: View {
     @State private var shouldPresentDetailsSheet: Bool = false
     
     @ObservedObject var recordDraft: RecordDraft
-    
     @State private var keyboardHeight: CGFloat = 0
-    
+
     var body: some View {
         ZStack {
             Rectangle()
