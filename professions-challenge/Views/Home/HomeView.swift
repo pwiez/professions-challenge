@@ -112,7 +112,6 @@ struct HomeView: View {
     
     private func applyFilters() {
         var records = allRecords
-        
         if filters.exported {
             records = records.filter { $0.isExported }
         }
@@ -130,7 +129,6 @@ struct HomeView: View {
         } else {
             records = records.sorted { $0.createdAt < $1.createdAt }
         }
-        
         filteredRecords = records
     }
 }
