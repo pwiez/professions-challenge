@@ -11,6 +11,7 @@ import SwiftUI
 
 struct CameraModel: View, MCameraScreen {
     @ObservedObject var cameraManager: CameraManager
+    @ObservedObject var recordDraft: RecordDraft
     let namespace: Namespace.ID
     let closeMCameraAction: () -> ()
     @State var flashOn: Bool = false
@@ -20,8 +21,9 @@ struct CameraModel: View, MCameraScreen {
     @State private var selectedItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
 
-    init(cameraManager: CameraManager, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
+    init(cameraManager: CameraManager, recordDraft: RecordDraft, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
         self.cameraManager = cameraManager
+        self.recordDraft = recordDraft
         self.namespace = namespace
         self.closeMCameraAction = closeMCameraAction
     }
@@ -68,9 +70,21 @@ struct CameraModel: View, MCameraScreen {
                     .onChange(of: selectedItems) {
                         Task {
                             selectedImages.removeAll()
+                            var didPickImage = false
                             for item in selectedItems {
-                                if let image = try? await item.loadTransferable(type: Image.self){
-                                    selectedImages.append(image)
+                                if let data = try? await item.loadTransferable(type: Data.self),
+                                   let uiImage = UIImage(data: data) {
+                                    let captured = CapturedImageModel(uiImage: uiImage)
+                                    DispatchQueue.main.async {
+                                        recordDraft.photos.append(captured)
+                                        selectedImages.append(Image(uiImage: uiImage))
+                                    }
+                                    didPickImage = true
+                                }
+                            }
+                            if didPickImage {
+                                DispatchQueue.main.async {
+                                    closeMCameraAction()
                                 }
                             }
                         }

@@ -21,16 +21,19 @@ struct CameraView: View {
         NavigationStack {
             camera
                 .setCameraScreen { cameraManager, namespace, closeAction in
-                                    CameraModel(
-                                        cameraManager: cameraManager,
-                                        namespace: namespace,
-                                        closeMCameraAction: {dismiss()}
-                                    )
-                                }
+                    CameraModel(
+                        cameraManager: cameraManager,
+                        recordDraft: recordDraft,
+                        namespace: namespace,
+                        closeMCameraAction: {dismiss()}
+                    )
+                }
                 .onImageCaptured { image, controller in
                     let captured = CapturedImageModel(uiImage: image)
                     self.imagemCapturada = captured
-                    recordDraft.photos.append(captured)
+                    DispatchQueue.main.async {
+                        recordDraft.photos.append(captured)
+                    }
                 }
                 .lockCameraInPortraitOrientation(AppDelegate.self)
                 .setCapturedMediaScreen(CapturedScreen.init)

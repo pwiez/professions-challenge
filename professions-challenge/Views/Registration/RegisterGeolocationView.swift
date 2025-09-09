@@ -34,22 +34,25 @@ struct RegisterGeolocationView: View {
                 .padding(.horizontal, 12)
             } else {
                 ScrollView{
-                    VStack(spacing: 20){
+                    VStack(spacing: 0){
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(recordDraft.geolocation?.title ?? "Localização sem título")
-                                .font(.system(size: 17))
-                                .foregroundStyle(.blueDark2)
                             HStack{
-                                Text("\(Image(systemName: "mappin.bubble"))")
-                                    .font(.system(size: 15))
+                                Text("\(Image(systemName: "location"))")
+                                    .font(.system(size: 17))
                                     .foregroundStyle(.gray)
                                 
-                                Spacer()
+                                Text(recordDraft.geolocation?.title ?? "Localização sem título")
+                                    .font(.system(size: 17))
+                                    .foregroundStyle(.blueDark2)
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .padding(.top, 8)
                         }
                         Divider()
                             .padding(.horizontal, 12)
-                            .padding(.vertical, 24)
+                            .padding(.top, 8)
+                            .padding(.bottom, 22)
                     }
                     Spacer()
                 }
