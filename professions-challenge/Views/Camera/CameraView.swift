@@ -35,7 +35,6 @@ struct CameraView: View {
                         recordDraft.photos.append(captured)
                     }
                 }
-                .lockCameraInPortraitOrientation(AppDelegate.self)
                 .setCapturedMediaScreen(CapturedScreen.init)
                 .startSession()
         }

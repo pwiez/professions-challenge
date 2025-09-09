@@ -44,7 +44,7 @@ struct HomeView: View {
                         }
                     }
                     
-                    if filteredRecords.isEmpty {
+                    if allRecords.isEmpty {
                         Spacer()
                         
                         VStack(spacing: 6){
@@ -62,7 +62,7 @@ struct HomeView: View {
                     } else {
                         ScrollView {
                             VStack {
-                                ForEach(filteredRecords){ record in
+                                ForEach(allRecords){ record in
                                     RecordCardView(record: record)
                                 }
                             }

@@ -10,6 +10,7 @@ import CoreLocation
 
 struct GeolocalizationView: View {
     @StateObject private var viewModel = MapsViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     @State var shouldShowManualLocationSheet: Bool = false
     @State var coordinates: String
@@ -50,6 +51,7 @@ struct GeolocalizationView: View {
                             .foregroundStyle(.light2)
                         Button{
                             recordDraft.geolocation = MapMarkerModel(position: CLLocationCoordinate2D(latitude: viewModel.cameraPositionLatitude, longitude: viewModel.cameraPositionLongitude), title: viewModel.utmString, snippet: "")
+                            dismiss()
                         } label: {
                             Text("Salvar")
                                 .font(.system(size: 17))
