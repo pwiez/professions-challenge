@@ -30,7 +30,7 @@ enum RegisterSection: SelectableOption, CaseIterable {
             case .general: return AnyView(RegisterGeneralView(recordDraft: recordDraft))
             case .audio: return AnyView(RegisterAudioView(recordDraft: recordDraft))
             case .photos: return AnyView(RegisterPhotoView(recordDraft: recordDraft))
-            case .geolocation: return AnyView(RegisterGeolocationView())
+            case .geolocation: return AnyView(RegisterGeolocationView(recordDraft: recordDraft))
             }
         }
 }

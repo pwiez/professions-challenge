@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct GeolocalizationView: View {
     @StateObject private var viewModel = MapsViewModel()
     
     @State var shouldShowManualLocationSheet: Bool = false
     @State var coordinates: String
+    
+    @ObservedObject var recordDraft: RecordDraft
     
     var body: some View {
         NavigationStack {
@@ -46,6 +49,7 @@ struct GeolocalizationView: View {
                             .frame(maxWidth: .infinity, maxHeight: 120)
                             .foregroundStyle(.light2)
                         Button{
+                            recordDraft.geolocation = MapMarkerModel(position: CLLocationCoordinate2D(latitude: viewModel.cameraPositionLatitude, longitude: viewModel.cameraPositionLongitude), title: viewModel.utmString, snippet: "")
                         } label: {
                             Text("Salvar")
                                 .font(.system(size: 17))
@@ -109,8 +113,4 @@ struct GeolocalizationView: View {
         .navigationBarBackButtonHidden(false)
         .toolbarBackground(.light, for: .navigationBar)
     }
-}
-
-#Preview {
-    GeolocalizationView(coordinates: "")
 }

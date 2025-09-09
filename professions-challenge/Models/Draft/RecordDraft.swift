@@ -17,6 +17,7 @@ class RecordDraft: ObservableObject {
     @Published var artifactDetails: ArtifactDetailsModel? = nil
     @Published var audios: [AudioModel] = []
     @Published var photos: [CapturedImageModel] = []
+    @Published var geolocation: MapMarkerModel? = nil
     
     var asRecordModel: RecordModel {
         let artifact = ArtifactModel(
@@ -30,7 +31,8 @@ class RecordDraft: ObservableObject {
             createdAt: createdAt,
             artifact: artifact,
             audios: audios,
-            photos: photos
+            photos: photos,
+            geolocation: geolocation
         )
     }
 }

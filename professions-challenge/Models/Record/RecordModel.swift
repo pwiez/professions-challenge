@@ -17,9 +17,9 @@ class RecordModel {
     var artifact: ArtifactModel
     var photos: [CapturedImageModel]
     var audios: [AudioModel]
-    // var location: 
+    var geolocation: MapMarkerModel?
     
-    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel], photos: [CapturedImageModel]) {
+    init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel], photos: [CapturedImageModel], geolocation: MapMarkerModel? = nil) {
         self.id = id
         self.name = name
         self.createdAt = createdAt
@@ -27,6 +27,7 @@ class RecordModel {
 //        self.photos = photos
         self.audios = audios
         self.photos = photos
+        self.geolocation = geolocation
     }
 }
 
