@@ -23,7 +23,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 22) {
                     HStack{
-                        Text("Nome do App")
+                        Text("Tekoá")
                             .foregroundStyle(.blueDark)
                             .font(.system(size: 22, weight: .bold))
                         

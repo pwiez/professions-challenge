@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct RegisterLocationView : View {
-    
-    @State private var site: String = ""
-    @State private var processNumber: String = ""
-    @State private var address: String = ""
-    @State private var institution: String = ""
+    @ObservedObject var recordDraft: RecordDraft
     
     var body: some View {
         ZStack {
@@ -26,7 +22,7 @@ struct RegisterLocationView : View {
                         .font(.body)
                         .foregroundColor(.blueDark2)
                     
-                    TextField("", text: $site)
+                    TextField("", text: bindingLocation(for: \.site))
                         .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                         .background(.light)
                         .cornerRadius(10)
@@ -37,7 +33,7 @@ struct RegisterLocationView : View {
                     Text("Nº do processo:")
                         .font(.body)
                         .foregroundColor(.blueDark2)
-                    TextField("", text: $processNumber)
+                    TextField("", text: intBindingLocation(for: \.processNumber))
                         .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                         .background(.light)
                         .cornerRadius(10)
@@ -48,7 +44,7 @@ struct RegisterLocationView : View {
                     Text("Endereço:")
                         .font(.body)
                         .foregroundColor(.blueDark2)
-                    TextField("", text: $address)
+                    TextField("", text: bindingLocation(for: \.adress))
                         .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                         .background(.light)
                         .cornerRadius(10)
@@ -59,7 +55,7 @@ struct RegisterLocationView : View {
                     Text("Instituição:")
                         .font(.body)
                         .foregroundColor(.blueDark2)
-                    TextField("", text: $institution)
+                    TextField("", text: bindingLocation(for: \.institution))
                         .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                         .background(.light)
                         .cornerRadius(10)
@@ -70,8 +66,36 @@ struct RegisterLocationView : View {
             .padding(12)
         }
     }
+    
+    func bindingLocation(for keyPath: WritableKeyPath<LocationInfoModel, String?>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                recordDraft.location?[keyPath: keyPath] ?? ""
+            },
+            set: { newValue in
+                if recordDraft.location == nil {
+                    recordDraft.location = LocationInfoModel()
+                }
+                recordDraft.location?[keyPath: keyPath] = newValue
+            }
+        )
+    }
+
+    func intBindingLocation(for keyPath: WritableKeyPath<LocationInfoModel, Int?>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                recordDraft.location?[keyPath: keyPath].map { String($0) } ?? ""
+            },
+            set: { newValue in
+                if recordDraft.location == nil {
+                    recordDraft.location = LocationInfoModel()
+                }
+                recordDraft.location?[keyPath: keyPath] = Int(newValue)
+            }
+        )
+    }
 }
 
 #Preview {
-    RegisterLocationView()
+    RegisterLocationView(recordDraft: RecordDraft())
 }

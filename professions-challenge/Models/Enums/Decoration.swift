@@ -52,3 +52,17 @@ extension Decoration {
         [.smoothed, .burnished, .corrugated, .brushed, .ungulate, .incision, .impression, .plastic, .painted, .punction, .applique, .englobe, .stencil, .carving, .dontApply]
     }
 }
+
+extension Decoration {
+    var isOther: Bool {
+        if case .other = self { return true }
+        return false
+    }
+
+    var otherText: String? {
+        if case let .other(text) = self {
+            return text
+        }
+        return nil
+    }
+}

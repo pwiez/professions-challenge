@@ -34,33 +34,38 @@ struct RegisterAudioView: View {
                 .padding(.horizontal, 12)
             } else {
                 
-                VStack(spacing: 20){
-                    ForEach(Array(recordDraft.audios.enumerated()), id: \.element.id) { index, audio in
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(audio.name)
-                                .font(.system(size: 17))
-                                .foregroundStyle(.blueDark2)
-                            
-                            HStack{
-                                Text("\(Image(systemName: "captions.bubble"))")
-                                    .font(.system(size: 15))
-                                    .foregroundStyle(.gray)
+                ScrollView{
+                    VStack(spacing: 20){
+                        ForEach(Array(recordDraft.audios.enumerated()), id: \.element.id) { index, audio in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(audio.name)
+                                    .font(.system(size: 17))
+                                    .foregroundStyle(.blueDark2)
                                 
-                                Spacer()
-                                
-                                if let url = audio.audioRecording?.fileURL {
-                                                let duration = getDuration(from: url)
-                                                Text(formatDuration(duration))
-                                                    .font(.system(size: 15))
-                                                    .foregroundStyle(.gray)
-                                            } else {
-                                                Text("Duração não disponível")
-                                                    .font(.system(size: 15))
-                                                    .foregroundStyle(.gray)
-                                            }
+                                HStack{
+                                    Text("\(Image(systemName: "captions.bubble"))")
+                                        .font(.system(size: 15))
+                                        .foregroundStyle(.gray)
+                                    
+                                    Spacer()
+                                    
+                                    if let url = audio.audioRecording?.fileURL {
+                                        let duration = getDuration(from: url)
+                                        Text(formatDuration(duration))
+                                            .font(.system(size: 15))
+                                            .foregroundStyle(.gray)
+                                    } else {
+                                        Text("Duração não disponível")
+                                            .font(.system(size: 15))
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                                Divider()
                             }
-                            Divider()
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 24)
                         }
+                        Spacer()
                     }
                 }
             }

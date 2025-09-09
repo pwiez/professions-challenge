@@ -62,3 +62,17 @@ extension ArtifactMaterial {
         [.rubber, .coal, .ceramic, .faience, .porcelain, .leather, .fossil, .lithic, .wood, .malacological, .metal, .bone, .paper, .sediment, .plastic, .textile, .flora, .fauna, .glass, .indeterminate]
     }
 }
+
+extension ArtifactMaterial {
+    var isOther: Bool {
+        if case .other = self { return true }
+        return false
+    }
+
+    var otherText: String? {
+        if case let .other(text) = self {
+            return text
+        }
+        return nil
+    }
+}

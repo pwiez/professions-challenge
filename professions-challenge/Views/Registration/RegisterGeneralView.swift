@@ -8,18 +8,9 @@
 import SwiftUI
 
 struct RegisterGeneralView: View {
-    @State private var processNumber: String = ""
-    @State private var denomination: String = ""
-    @State private var description: String = ""
-    //
-    @State private var institutionAndUseSigns: String = ""
-    @State private var filiation: String = ""
-    @State private var height: String = ""
-    @State private var width: String = ""
-    @State private var weight: String = ""
-    @State private var depth: String = ""
-    
     @State private var shouldPresentDetailsSheet: Bool = false
+    
+    @ObservedObject var recordDraft: RecordDraft
     
     var body: some View {
         ZStack {
@@ -43,7 +34,17 @@ struct RegisterGeneralView: View {
                         Text("Nº do Registro:")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(.blueDark2)
-                        TextField("", text: $processNumber)
+                        TextField("", text: Binding(
+                            get: {
+                                recordDraft.artifactData?.registerNumber.map { String($0) } ?? ""
+                            },
+                            set: { newValue in
+                                if recordDraft.artifactData == nil {
+                                    recordDraft.artifactData = ArtifactDataModel()
+                                }
+                                recordDraft.artifactData?.registerNumber = Int(newValue)
+                            }
+                        ))
                             .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                             .background(.light)
                             .cornerRadius(10)
@@ -54,7 +55,7 @@ struct RegisterGeneralView: View {
                         Text("Denominação:")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(.blueDark2)
-                        TextField("", text: $denomination)
+                        TextField("", text: bindingData(for: \.denomination))
                             .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                             .background(.light)
                             .cornerRadius(10)
@@ -65,7 +66,7 @@ struct RegisterGeneralView: View {
                         Text("Descrição:")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(.blueDark2)
-                        TextField("", text: $description)
+                        TextField("", text: bindingData(for: \.artifactDescription))
                             .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                             .background(.light)
                             .cornerRadius(10)
@@ -115,10 +116,10 @@ struct RegisterGeneralView: View {
                     
                     VStack(alignment: .leading, spacing: 24) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Instituição e marcas de uso:")
+                            Text("Inscrições e marcas de uso:")
                                 .font(.system(size: 17, weight: .regular))
                                 .foregroundColor(.blueDark2)
-                            TextField("", text: $institutionAndUseSigns)
+                            TextField("", text: bindingDetails(for: \.inscriptions))
                                 .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                                 .background(.light)
                                 .cornerRadius(10)
@@ -128,7 +129,7 @@ struct RegisterGeneralView: View {
                             Text("Filiação cultural:")
                                 .font(.system(size: 17, weight: .regular))
                                 .foregroundColor(.blueDark2)
-                            TextField("", text: $filiation)
+                            TextField("", text: bindingDetails(for: \.filiation))
                                 .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                                 .background(.light)
                                 .cornerRadius(10)
@@ -140,7 +141,7 @@ struct RegisterGeneralView: View {
                                 Text("Altura:")
                                     .font(.system(size: 17, weight: .regular))
                                     .foregroundColor(.blueDark2)
-                                TextField("", text: $height)
+                                TextField("", text: bindingDetailsDouble(for: \.height))
                                     .frame(maxWidth: 167, minHeight: 37, maxHeight: 37)
                                     .background(.light)
                                     .cornerRadius(10)
@@ -151,7 +152,7 @@ struct RegisterGeneralView: View {
                                 Text("Profundidade:")
                                     .font(.system(size: 17, weight: .regular))
                                     .foregroundColor(.blueDark2)
-                                TextField("", text: $depth)
+                                TextField("", text: bindingDetailsDouble(for: \.depth))
                                     .frame(maxWidth: 167, minHeight: 37, maxHeight: 37)
                                     .background(.light)
                                     .cornerRadius(10)
@@ -165,7 +166,7 @@ struct RegisterGeneralView: View {
                                 Text("Largura:")
                                     .font(.system(size: 17, weight: .regular))
                                     .foregroundColor(.blueDark2)
-                                TextField("", text: $width)
+                                TextField("", text: bindingDetailsDouble(for: \.width))
                                     .frame(maxWidth: 167, minHeight: 37, maxHeight: 37)
                                     .background(.light)
                                     .cornerRadius(10)
@@ -176,7 +177,7 @@ struct RegisterGeneralView: View {
                                 Text("Peso:")
                                     .font(.system(size: 17, weight: .regular))
                                     .foregroundColor(.blueDark2)
-                                TextField("", text: $weight)
+                                TextField("", text: bindingDetailsDouble(for: \.weight))
                                     .frame(maxWidth: 167, minHeight: 37, maxHeight: 37)
                                     .background(.light)
                                     .cornerRadius(10)
@@ -191,12 +192,57 @@ struct RegisterGeneralView: View {
             .padding(12)
         }
         .sheet(isPresented: $shouldPresentDetailsSheet) {
-            DetailsSheetView()
+            DetailsSheetView(recordDraft: recordDraft)
         }
         .presentationDragIndicator(.visible)
+    }
+    
+    func bindingData(for keyPath: WritableKeyPath<ArtifactDataModel, String?>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                recordDraft.artifactData?[keyPath: keyPath] ?? ""
+            },
+            set: { newValue in
+                if recordDraft.artifactData == nil {
+                    recordDraft.artifactData = ArtifactDataModel()
+                }
+                recordDraft.artifactData?[keyPath: keyPath] = newValue
+            }
+        )
+    }
+    
+    func bindingDetails(for keyPath: WritableKeyPath<ArtifactDetailsModel, String?>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                recordDraft.artifactDetails?[keyPath: keyPath] ?? ""
+            },
+            set: { newValue in
+                if recordDraft.artifactDetails == nil {
+                    recordDraft.artifactDetails = ArtifactDetailsModel()
+                }
+                recordDraft.artifactDetails?[keyPath: keyPath] = newValue
+            }
+        )
+    }
+    
+    func bindingDetailsDouble(for keyPath: WritableKeyPath<ArtifactDetailsModel, Double?>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                if let value = recordDraft.artifactDetails?[keyPath: keyPath] {
+                    return String(value)
+                }
+                return ""
+            },
+            set: { newValue in
+                if recordDraft.artifactDetails == nil {
+                    recordDraft.artifactDetails = ArtifactDetailsModel()
+                }
+                recordDraft.artifactDetails?[keyPath: keyPath] = Double(newValue)
+            }
+        )
     }
 }
 
 #Preview {
-    RegisterGeneralView()
+    RegisterGeneralView(recordDraft: RecordDraft())
 }
