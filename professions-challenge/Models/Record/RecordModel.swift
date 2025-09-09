@@ -18,6 +18,7 @@ class RecordModel {
     var photos: [CapturedImageModel]
     var audios: [AudioModel]
     var geolocation: MapMarkerModel?
+    var isExported = false
     
     init(id: UUID, name: String, createdAt: Date, artifact: ArtifactModel, audios: [AudioModel], photos: [CapturedImageModel], geolocation: MapMarkerModel? = nil) {
         self.id = id

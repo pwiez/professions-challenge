@@ -34,6 +34,7 @@ struct RegisterLocationView : View {
                         .font(.body)
                         .foregroundColor(.blueDark2)
                     TextField("", text: intBindingLocation(for: \.processNumber))
+                        .keyboardType(.numberPad)
                         .frame(maxWidth: .infinity, minHeight: 37, maxHeight: 37)
                         .background(.light)
                         .cornerRadius(10)

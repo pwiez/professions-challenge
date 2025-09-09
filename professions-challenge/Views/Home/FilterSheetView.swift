@@ -54,6 +54,7 @@ struct FilterSheetView: View {
                     .padding(0)
                     
                     Button {
+                        onApply()
                         dismiss()
                     } label: {
                         Text("Filtrar")

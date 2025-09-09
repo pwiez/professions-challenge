@@ -10,7 +10,8 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query var records: [RecordModel]
+    @Query var allRecords: [RecordModel]
+    @State private var filteredRecords: [RecordModel] = []
     
     @State private var showFilters = false
     @State private var filters = FilterOptions()
@@ -43,7 +44,7 @@ struct HomeView: View {
                         }
                     }
                     
-                    if records.isEmpty {
+                    if filteredRecords.isEmpty {
                         Spacer()
                         
                         VStack(spacing: 6){
@@ -61,7 +62,7 @@ struct HomeView: View {
                     } else {
                         ScrollView {
                             VStack {
-                                ForEach(records){ record in
+                                ForEach(filteredRecords){ record in
                                     RecordCardView(record: record)
                                 }
                             }
@@ -88,17 +89,40 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showFilters) {
                 FilterSheetView(filters: $filters) {
-                    
+                    applyFilters()
                 }
                 .presentationDetents([.fraction(0.3)])
                 .presentationDragIndicator(.visible)
             }
         }
         .tint(.clay)
+        .onAppear {
+            applyFilters()
+        }
     }
     
     private func applyFilters() {
-        // TODO: Apply homeView filter
+        var records = allRecords
+
+        if filters.exported {
+            records = records.filter { $0.isExported }
+        }
+        
+        if filters.withImage {
+            records = records.filter { !$0.photos.isEmpty }
+        }
+        
+        if filters.withAudio {
+            records = records.filter { !$0.audios.isEmpty }
+        }
+        
+        if filters.recents {
+            records = records.sorted { $0.createdAt > $1.createdAt }
+        } else {
+            records = records.sorted { $0.createdAt < $1.createdAt }
+        }
+
+        filteredRecords = records
     }
 }
 
