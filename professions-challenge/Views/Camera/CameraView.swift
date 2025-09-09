@@ -13,9 +13,13 @@ struct CameraView: View {
     
     @State private var imagemCapturada: CapturedImageModel?
     
+    @ObservedObject var recordDraft: RecordDraft
+    
+    var camera: MCamera = MCamera()
+    
     var body: some View {
         NavigationStack {
-            MCamera()
+            camera
                 .setCameraScreen { cameraManager, namespace, closeAction in
                                     CameraModel(
                                         cameraManager: cameraManager,
@@ -24,7 +28,9 @@ struct CameraView: View {
                                     )
                                 }
                 .onImageCaptured { image, controller in
-                    self.imagemCapturada = CapturedImageModel(uiImage: image)
+                    let captured = CapturedImageModel(uiImage: image)
+                    self.imagemCapturada = captured
+                    recordDraft.photos.append(captured)
                 }
                 .lockCameraInPortraitOrientation(AppDelegate.self)
                 .setCapturedMediaScreen(CapturedScreen.init)

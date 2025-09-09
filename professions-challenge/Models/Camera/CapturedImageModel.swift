@@ -18,7 +18,11 @@ class CapturedImageModel {
     }
     
     init(uiImage: UIImage) {
-        self.imageData = uiImage.jpegData(compressionQuality: 1.0)
+        guard let data = uiImage.jpegData(compressionQuality: 1.0) else {
+            self.imageData = nil
+            return
+        }
+        self.imageData = data
     }
     
     var uiImage: UIImage? {

@@ -24,22 +24,24 @@ enum RegisterSection: SelectableOption, CaseIterable {
         }
     }
     
-    var view: some View {
-        switch self {
-        case .location: return AnyView(RegisterLocationView())
-        case .general: return AnyView(RegisterGeneralView()) // Placeholder
-        case .audio: return AnyView(RegisterAudioView())
-        case .photos: return AnyView(RegisterPhotoView())
-        case .geolocation: return AnyView(RegisterGeolocationView())
+    func view(recordDraft: RecordDraft) -> some View {
+            switch self {
+            case .location: return AnyView(RegisterLocationView())
+            case .general: return AnyView(RegisterGeneralView())
+            case .audio: return AnyView(RegisterAudioView(recordDraft: recordDraft))
+            case .photos: return AnyView(RegisterPhotoView(recordDraft: recordDraft))
+            case .geolocation: return AnyView(RegisterGeolocationView())
+            }
         }
-    }
 }
 
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedSection: RegisterSection? = nil
+    @Binding var isPresenting: Bool
     
-    var onSave : (RecordModel) -> ()
+    @ObservedObject var recordDraft: RecordDraft
 
     var body: some View {
         NavigationStack {
@@ -63,12 +65,12 @@ struct RegisterView: View {
                 if let section = selectedSection {
                     if section == .general {
                         ScrollView(.vertical) {
-                            section.view
+                            section.view(recordDraft: recordDraft)
                                 .padding(12)
                         }
                         .scrollIndicators(.never)
                     } else {
-                        section.view
+                        section.view(recordDraft: recordDraft)
                             .padding(12)
                     }
                 } else {
@@ -76,7 +78,16 @@ struct RegisterView: View {
                 }
                 
                 Button{
-                    onSave(RecordModel.mock())
+                    let finalRecord = recordDraft.asRecordModel
+                    
+                    do {
+                        modelContext.insert(finalRecord)
+                        try modelContext.save()
+                        
+                        isPresenting = false
+                    } catch {
+                        print("Erro ao salvar: \(error)")
+                    }
                 } label: {
                     Text("Finalizar ficha")
                         .font(.system(size: 17))

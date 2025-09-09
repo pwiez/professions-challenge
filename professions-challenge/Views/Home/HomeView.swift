@@ -14,6 +14,7 @@ struct HomeView: View {
     
     @State private var showFilters = false
     @State private var filters = FilterOptions()
+    @State private var isPresentingTitleRegistration = false
     
     var body: some View {
         NavigationStack{
@@ -69,12 +70,8 @@ struct HomeView: View {
                     }
                     Spacer()
                     
-                    NavigationLink {
-                        TitleRegistrationView() {
-                            newRecord in
-                            
-                            modelContext.insert(newRecord)
-                        }
+                    NavigationLink(isActive: $isPresentingTitleRegistration) {
+                        TitleRegistrationView(isPresenting: $isPresentingTitleRegistration)
                     } label: {
                         Text("Cadastrar ficha")
                             .font(.system(size: 17))

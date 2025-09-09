@@ -9,28 +9,28 @@ import MijickCamera
 import PhotosUI
 import SwiftUI
 
-struct CameraModel: MCameraScreen {
+struct CameraModel: View, MCameraScreen {
     @ObservedObject var cameraManager: CameraManager
     let namespace: Namespace.ID
     let closeMCameraAction: () -> ()
     @State var flashOn: Bool = false
     @State var isFrontCamera: Bool = false
-    
+
     @State private var shouldPresentPhotosPicker: Bool = false
     @State private var selectedItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
-    
+
     init(cameraManager: CameraManager, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
         self.cameraManager = cameraManager
         self.namespace = namespace
         self.closeMCameraAction = closeMCameraAction
     }
-    
+
     var body: some View {
         ZStack {
             createCameraOutputView()
                 .ignoresSafeArea()
-            
+
             VStack (alignment: .center){
                 HStack {
                     createFlashButton()
@@ -50,9 +50,9 @@ struct CameraModel: MCameraScreen {
                 .frame(maxWidth: .infinity, maxHeight: 60)
                 .padding(.top, 20)
                 .background(Color.black.opacity(0.5))
-                
+
                 Spacer()
-                
+
                 HStack {
                     Button {
                         shouldPresentPhotosPicker.toggle()
@@ -122,7 +122,7 @@ private extension CameraModel {
                 Circle()
                     .fill(Color(red: 0.47, green: 0.47, blue: 0.47))
                     .frame(width: 45, height: 45)
-                
+
                 Image(systemName: flashOn ? "bolt.fill" : "bolt.slash.fill")
                     .padding(10)
                     .font(.system(size: 20))
@@ -141,7 +141,7 @@ private extension CameraModel {
                     print("Erro ao definir a posição da câmera: \(error)")
                 }
             }
-            
+
         }
         label: {
             Image("CameraFlipButton")

@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct TitleRegistrationView: View {
+    @Binding var isPresenting: Bool
     @State private var nomeFicha: String = ""
     @State private var continueToRegister: Bool = false
     
-    var onSave : (RecordModel) -> ()
+    @StateObject private var recordDraft = RecordDraft()
     
     var body: some View {
         ZStack {
@@ -47,6 +48,7 @@ struct TitleRegistrationView: View {
                 }
                 
                 Button {
+                    recordDraft.name = nomeFicha
                     continueToRegister = true
                 } label: {
                     Text("Próximo")
@@ -62,7 +64,7 @@ struct TitleRegistrationView: View {
             .padding()
         }
         .fullScreenCover(isPresented: $continueToRegister, content: {
-            RegisterView(onSave: onSave)
+            RegisterView(isPresenting: $isPresenting, recordDraft: recordDraft)
                 .transition(.slide)
         })
         .transaction { transaction in
@@ -73,6 +75,6 @@ struct TitleRegistrationView: View {
 
 #Preview {
     NavigationView {
-        TitleRegistrationView(onSave: {_ in })
+        TitleRegistrationView(isPresenting: .constant(true))
     }
 }
