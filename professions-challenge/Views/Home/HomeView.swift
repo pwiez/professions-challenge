@@ -30,7 +30,6 @@ struct HomeView: View {
                                 .foregroundStyle(.blueDark)
                                 .font(.system(size: 22, weight: .bold))
                             
-                            
                             Spacer()
                             
                             Button {
