@@ -26,7 +26,7 @@ struct HomeView: View {
                     
                     VStack(spacing: 22) {
                         HStack{
-                            Text("Tekoá")
+                            Text("Origo")
                                 .foregroundStyle(.blueDark)
                                 .font(.system(size: 22, weight: .bold))
                             
@@ -86,8 +86,8 @@ struct HomeView: View {
                                         .fill(.clay)
                                 }
                         }
-                        .padding(.horizontal, 12)
                     }
+                    .padding(.horizontal, 12)
                     .sheet(isPresented: $showFilters) {
                         FilterSheetView(filters: $filters) {
                             

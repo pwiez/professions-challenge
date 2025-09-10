@@ -297,7 +297,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Tekoá";
+				INFOPLIST_KEY_CFBundleDisplayName = Origo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
@@ -315,7 +315,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.tekoa;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.origo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -336,7 +336,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Tekoá";
+				INFOPLIST_KEY_CFBundleDisplayName = Origo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
@@ -354,7 +354,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.tekoa;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.venetikides.origo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
