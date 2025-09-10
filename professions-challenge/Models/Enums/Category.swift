@@ -15,7 +15,7 @@ enum Category: Codable, Hashable, SelectableOption {
     case sediment
     case archaeobotanical
     case zooarchaeological
-    case other(description: String)
+    case other(text: String)
     
     var label: String {
         switch self {
@@ -26,7 +26,7 @@ enum Category: Codable, Hashable, SelectableOption {
         case .sediment: return "Sedimento/Solo"
         case .archaeobotanical: return "Arqueobotânico"
         case .zooarchaeological: return "Zooarqueológico"
-        case .other(let description): return description
+        case .other(let text): return text
         }
     }
 }

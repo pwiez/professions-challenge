@@ -21,29 +21,17 @@
 		3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Extensions/Color.swift,
 				Info.plist,
 			);
 			target = B137BA902E5F277800DE87BF /* professions-challenge */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DD9C40F82E69D52700D3A8B8 /* Exceptions for "professions-challenge" folder in "Copy Bundle Resources" phase from "professions-challenge" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = B137BA8F2E5F277800DE87BF /* Resources */;
-			membershipExceptions = (
-				Extensions/Color.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B137BA932E5F277800DE87BF /* professions-challenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				3C6A86BC2E6608B000B40083 /* Exceptions for "professions-challenge" folder in "professions-challenge" target */,
-				DD9C40F82E69D52700D3A8B8 /* Exceptions for "professions-challenge" folder in "Copy Bundle Resources" phase from "professions-challenge" target */,
 			);
 			path = "professions-challenge";
 			sourceTree = "<group>";
@@ -309,6 +297,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tekoá";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
@@ -319,8 +308,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,6 +336,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "professions-challenge/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tekoá";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs your authorization to access the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Sua localização é utilizada para centralizar o mapa e facilitar o uso.";
@@ -357,8 +347,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -23,7 +23,7 @@ enum Decoration: Codable, Hashable, SelectableOption {
     case stencil
     case carving
     case dontApply
-    case other(description: String)
+    case other(text: String)
     
     var label: String {
         switch self {
@@ -42,7 +42,7 @@ enum Decoration: Codable, Hashable, SelectableOption {
         case .stencil: return "Estêncil"
         case .carving: return "Entalhe"
         case .dontApply: return "Não se aplica"
-        case .other(let description): return description
+        case .other(let text): return text
         }
     }
 }
@@ -50,5 +50,19 @@ enum Decoration: Codable, Hashable, SelectableOption {
 extension Decoration {
     static var selectableOptions: [Decoration] {
         [.smoothed, .burnished, .corrugated, .brushed, .ungulate, .incision, .impression, .plastic, .painted, .punction, .applique, .englobe, .stencil, .carving, .dontApply]
+    }
+}
+
+extension Decoration {
+    var isOther: Bool {
+        if case .other = self { return true }
+        return false
+    }
+
+    var otherText: String? {
+        if case let .other(text) = self {
+            return text
+        }
+        return nil
     }
 }

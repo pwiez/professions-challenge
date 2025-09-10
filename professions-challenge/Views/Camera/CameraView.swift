@@ -8,30 +8,36 @@
 import SwiftUI
 import MijickCamera
 
-struct CapturedImage: Identifiable {
-    let id = UUID()
-    let image: UIImage
-}
-
 struct CameraView: View {
-    @State private var imagemCapturada: CapturedImage?
-    @State private var showDetails = false
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var imagemCapturada: CapturedImageModel?
+    
+    @ObservedObject var recordDraft: RecordDraft
+    
+    var camera: MCamera = MCamera()
     
     var body: some View {
         NavigationStack {
-            MCamera()
-                .setCameraScreen(CameraModel.init)
-                .onImageCaptured { image, controller in
-                    self.imagemCapturada = CapturedImage(image: image)
-                    self.showDetails = true
+            camera
+                .setCameraScreen { cameraManager, namespace, closeAction in
+                    CameraModel(
+                        cameraManager: cameraManager,
+                        recordDraft: recordDraft,
+                        namespace: namespace,
+                        closeMCameraAction: {dismiss()}
+                    )
                 }
-                .lockCameraInPortraitOrientation(AppDelegate.self)
+                .onImageCaptured { image, controller in
+                    let captured = CapturedImageModel(uiImage: image)
+                    self.imagemCapturada = captured
+                    DispatchQueue.main.async {
+                        recordDraft.photos.append(captured)
+                    }
+                }
                 .setCapturedMediaScreen(CapturedScreen.init)
                 .startSession()
         }
+        .navigationBarBackButtonHidden()
     }
-}
-
-#Preview  {
-    CameraView()
 }

@@ -9,28 +9,30 @@ import MijickCamera
 import PhotosUI
 import SwiftUI
 
-struct CameraModel: MCameraScreen {
+struct CameraModel: View, MCameraScreen {
     @ObservedObject var cameraManager: CameraManager
+    @ObservedObject var recordDraft: RecordDraft
     let namespace: Namespace.ID
     let closeMCameraAction: () -> ()
     @State var flashOn: Bool = false
     @State var isFrontCamera: Bool = false
-    
+
     @State private var shouldPresentPhotosPicker: Bool = false
     @State private var selectedItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
-    
-    init(cameraManager: CameraManager, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
+
+    init(cameraManager: CameraManager, recordDraft: RecordDraft, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
         self.cameraManager = cameraManager
+        self.recordDraft = recordDraft
         self.namespace = namespace
         self.closeMCameraAction = closeMCameraAction
     }
-    
+
     var body: some View {
         ZStack {
             createCameraOutputView()
                 .ignoresSafeArea()
-            
+
             VStack (alignment: .center){
                 HStack {
                     createFlashButton()
@@ -38,7 +40,7 @@ struct CameraModel: MCameraScreen {
                         .padding([.trailing, .leading], 40)
                     Spacer()
                     Button {
-                        exit(0)
+                        closeMCameraAction()
                     } label: {
                         Image(systemName: "xmark.circle")
                             .font(.system(size: 36))
@@ -50,9 +52,9 @@ struct CameraModel: MCameraScreen {
                 .frame(maxWidth: .infinity, maxHeight: 60)
                 .padding(.top, 20)
                 .background(Color.black.opacity(0.5))
-                
+
                 Spacer()
-                
+
                 HStack {
                     Button {
                         shouldPresentPhotosPicker.toggle()
@@ -68,9 +70,21 @@ struct CameraModel: MCameraScreen {
                     .onChange(of: selectedItems) {
                         Task {
                             selectedImages.removeAll()
+                            var didPickImage = false
                             for item in selectedItems {
-                                if let image = try? await item.loadTransferable(type: Image.self){
-                                    selectedImages.append(image)
+                                if let data = try? await item.loadTransferable(type: Data.self),
+                                   let uiImage = UIImage(data: data) {
+                                    let captured = CapturedImageModel(uiImage: uiImage)
+                                    DispatchQueue.main.async {
+                                        recordDraft.photos.append(captured)
+                                        selectedImages.append(Image(uiImage: uiImage))
+                                    }
+                                    didPickImage = true
+                                }
+                            }
+                            if didPickImage {
+                                DispatchQueue.main.async {
+                                    closeMCameraAction()
                                 }
                             }
                         }
@@ -122,7 +136,7 @@ private extension CameraModel {
                 Circle()
                     .fill(Color(red: 0.47, green: 0.47, blue: 0.47))
                     .frame(width: 45, height: 45)
-                
+
                 Image(systemName: flashOn ? "bolt.fill" : "bolt.slash.fill")
                     .padding(10)
                     .font(.system(size: 20))
@@ -141,7 +155,7 @@ private extension CameraModel {
                     print("Erro ao definir a posição da câmera: \(error)")
                 }
             }
-            
+
         }
         label: {
             Image("CameraFlipButton")

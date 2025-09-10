@@ -10,11 +10,13 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query var allRecords: [RecordModel]
+    @State private var filteredRecords: [RecordModel] = []
     @AppStorage("Onboarding") var isOnboardingComplete: Bool = false
-    @Query var records: [RecordModel]
     
     @State private var showFilters = false
     @State private var filters = FilterOptions()
+    @State private var isPresentingTitleRegistration = false
     
     var body: some View {
         NavigationStack{
@@ -24,7 +26,7 @@ struct HomeView: View {
                     
                     VStack(spacing: 22) {
                         HStack{
-                            Text("Nome do App")
+                            Text("Tekoá")
                                 .foregroundStyle(.blueDark)
                                 .font(.system(size: 22, weight: .bold))
                             
@@ -44,7 +46,7 @@ struct HomeView: View {
                             }
                         }
                         
-                        if records.isEmpty {
+                        if allRecords.isEmpty {
                             Spacer()
                             
                             VStack(spacing: 6){
@@ -62,7 +64,7 @@ struct HomeView: View {
                         } else {
                             ScrollView {
                                 VStack {
-                                    ForEach(records){ record in
+                                    ForEach(allRecords){ record in
                                         RecordCardView(record: record)
                                     }
                                 }
@@ -71,8 +73,8 @@ struct HomeView: View {
                         }
                         Spacer()
                         
-                        NavigationLink {
-                            TitleRegistrationView()
+                        NavigationLink(isActive: $isPresentingTitleRegistration) {
+                            TitleRegistrationView(isPresenting: $isPresentingTitleRegistration)
                         } label: {
                             Text("Cadastrar ficha")
                                 .font(.system(size: 17))
@@ -84,15 +86,15 @@ struct HomeView: View {
                                         .fill(.clay)
                                 }
                         }
+                        .padding(.horizontal, 12)
                     }
-                    .padding(.horizontal, 12)
-                }
-                .sheet(isPresented: $showFilters) {
-                    FilterSheetView(filters: $filters) {
-                        
+                    .sheet(isPresented: $showFilters) {
+                        FilterSheetView(filters: $filters) {
+                            
+                        }
+                        .presentationDetents([.fraction(0.3)])
+                        .presentationDragIndicator(.visible)
                     }
-                    .presentationDetents([.fraction(0.3)])
-                    .presentationDragIndicator(.visible)
                 }
             }
             else {
@@ -102,10 +104,31 @@ struct HomeView: View {
             }
         }
         .tint(.clay)
+        .onAppear {
+            applyFilters()
+        }
     }
     
     private func applyFilters() {
-        // TODO: Apply homeView filter
+        var records = allRecords
+        if filters.exported {
+            records = records.filter { $0.isExported }
+        }
+        
+        if filters.withImage {
+            records = records.filter { !$0.photos.isEmpty }
+        }
+        
+        if filters.withAudio {
+            records = records.filter { !$0.audios.isEmpty }
+        }
+        
+        if filters.recents {
+            records = records.sorted { $0.createdAt > $1.createdAt }
+        } else {
+            records = records.sorted { $0.createdAt < $1.createdAt }
+        }
+        filteredRecords = records
     }
 }
 

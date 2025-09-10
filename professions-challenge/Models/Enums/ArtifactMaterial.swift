@@ -28,7 +28,7 @@ enum ArtifactMaterial: Codable, Hashable, SelectableOption {
     case fauna
     case glass
     case indeterminate
-    case other(description: String)
+    case other(text: String)
     
     var label: String {
         switch self {
@@ -52,7 +52,7 @@ enum ArtifactMaterial: Codable, Hashable, SelectableOption {
         case .fauna: return "Fauna"
         case .glass: return "Vidro"
         case .indeterminate: return "Indeterminado"
-        case .other(let description): return description
+        case .other(let text): return text
         }
     }
 }
@@ -60,5 +60,19 @@ enum ArtifactMaterial: Codable, Hashable, SelectableOption {
 extension ArtifactMaterial {
     static var selectableOptions: [ArtifactMaterial] {
         [.rubber, .coal, .ceramic, .faience, .porcelain, .leather, .fossil, .lithic, .wood, .malacological, .metal, .bone, .paper, .sediment, .plastic, .textile, .flora, .fauna, .glass, .indeterminate]
+    }
+}
+
+extension ArtifactMaterial {
+    var isOther: Bool {
+        if case .other = self { return true }
+        return false
+    }
+
+    var otherText: String? {
+        if case let .other(text) = self {
+            return text
+        }
+        return nil
     }
 }
